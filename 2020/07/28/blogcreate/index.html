@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.9k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      20
        分钟
     </span>
   
@@ -233,7 +233,7 @@ $ npm -v</code></pre>
 
 <p>如果安装正确，就会得到下面的版本信息，如果没有显示版本信息大家看看软件是否安装正确哟</p>
 <p><img src="/img/page1/6.png" srcset="/img/loading.gif" alt=""></p>
-<p>一定要先check，我在搭建博客的过程中有几次没有check，到后面使用指令时才发现不能用，又得重头来过了呜呜呜</p>
+<p><strong>小喇叭响起：</strong>一定要先check，我在搭建博客的过程中有几次没有check，到后面使用指令时才发现不能用，又得重头来过了呜呜呜</p>
 <p>下面正式开始配置环境，输入第一条指令：</p>
 <pre><code class="hljs routeros">$ git<span class="hljs-built_in"> config </span>--global user.name <span class="hljs-string">"Ztt"</span></code></pre>
 
@@ -265,8 +265,49 @@ $ npm -v</code></pre>
 
 <p>然后再敲入： yes 如果最后显示：</p>
 <p>那么就是真的可以啦，中间的小warn可以忽略~</p>
-<h2 id="Step-4：hexo-安排！"><a href="#Step-4：hexo-安排！" class="headerlink" title="Step 4：hexo 安排！"></a>Step 4：hexo 安排！</h2><p>根据你的电脑在合适的位置新建一个myblog文件夹( 当然你也可以任意发挥取名字，叫啥名字不重要，肚子里的东西比较重要。这个文件夹以后就用来存放你的博客的所有本地文档 )</p>
-<p>然后点击文件夹，右键，Git bash，开冲！</p>
+<h2 id="Step-4：hexo-安排！"><a href="#Step-4：hexo-安排！" class="headerlink" title="Step 4：hexo 安排！"></a>Step 4：hexo 安排！</h2><p>根据你的电脑在合适的位置新建一个myblog文件夹</p>
+<p>( 当然你也可以任意发挥取名字，叫啥名字不重要，肚子里的东西比较重要。这个文件夹以后就用来存放你博客相关的所有本地文档 啦)</p>
+<p>点击文件夹，右键，Git bash，开冲！</p>
+<p>由于hexo程序和下载的git，node都是一直在更新的，而我们看的攻略往往不有一段时间的，所以建议大家直接去hexo的官网查找最新的hexo安装指令：<a href="https://hexo.io/" target="_blank" rel="noopener">https://hexo.io/</a></p>
+<p>我安装的时候最新的指令是这样滴：</p>
+<p><img src="/img/page1/7.png" srcset="/img/loading.gif" alt=""></p>
+<p>再一次确认hexo是否安装好</p>
+<pre><code class="hljs elixir"><span class="hljs-variable">$ </span>hexo -v</code></pre>
+
+<p>如果运行后显示出了hexo的版本信息，就证明你已经完成了hexo的安装</p>
+<p>初始化hexo</p>
+<pre><code class="hljs elixir"><span class="hljs-variable">$ </span>hexo init</code></pre>
+
+<p>运行完代码显示：INFO Start blogging with Hexo！的提示就说明你已经完成了hexo的初始化，再一次给自己鼓掌~</p>
+<p>安装依赖包</p>
+<pre><code class="hljs cmake">$ npm <span class="hljs-keyword">install</span></code></pre>
+
+<p>敲入：</p>
+<pre><code class="hljs sql">$ npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save hexo-deployer-git</span></code></pre>
+
+<p>出现：</p>
+<p><img src="/img/page1/8.png" srcset="/img/loading.gif" alt=""></p>
+<p>中间的一些warn可以忽略</p>
+<p>接下来打开myblog文件夹中的_config.yml文件，可以只用文档打开~</p>
+<p>拉到最下面进行修改：</p>
+<p><img src="/img/page1/9.png" srcset="/img/loading.gif" alt=""></p>
+<p><strong>小喇叭再次响起：</strong>这里需要格外注意不要乱修改缩进，然后type，repo，branch的冒号后面都需要有一个空格。</p>
+<p>repo后面填的内容可以直接去你的github网页中进入到博客对应的repository中去，点击code进行复制：</p>
+<p><img src="/img/page1/10.png" srcset="/img/loading.gif" alt=""></p>
+<p>完成这些后已经翻过了第二座大山啦~可以启动本地界面，看看生成的博客呀：</p>
+<pre><code class="hljs elixir"><span class="hljs-variable">$ </span>hexo s</code></pre>
+
+<p>如果本地可以显示啦那么就说明已经成功了一大半~现在，我们需要把它发布到github上，敲入</p>
+<pre><code class="hljs elixir"><span class="hljs-variable">$ </span>hexo clean
+<span class="hljs-variable">$ </span>hexo g -d</code></pre>
+
+<p>这样等待一小会，你就可以进入博客的网址去看在线的博客啦~</p>
+<h2 id="Step-5：主题挑选（非常关键）！"><a href="#Step-5：主题挑选（非常关键）！" class="headerlink" title="Step 5：主题挑选（非常关键）！"></a>Step 5：主题挑选（非常关键）！</h2><p><a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
+<p>hexo的官网上提供了很多可以利用的主题，你可以挑选一个你喜欢的主题进行配置。但但但但但是！我给大家的建议是，在挑选好喜欢的主题后，先看看主题的配置是否麻烦，新手小白最好选择一些操作简单的主题进行配置。因为在配置过程中涉及到对blog的一些文件夹进行修改，一旦出现问题，你的文件也没有备份，很可能主题配置失败，然后又无法恢复到最初始的lanscape主题。这时不要放弃，你需要重新再来！这也就是本人为什么重复创建了很多次的原因Wuuuuuuuuuu~</p>
+<p>这里给大家提供几个简单易配置的主题，大家可以试试手哟~</p>
+<p><a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="noopener">https://github.com/fluid-dev/hexo-theme-fluid</a></p>
+<p><a href="https://github.com/izhaoo/hexo-theme-zhaoo" target="_blank" rel="noopener">https://github.com/izhaoo/hexo-theme-zhaoo</a></p>
+<p><a href="https://github.com/Fechin/hexo-theme-diaspora" target="_blank" rel="noopener">https://github.com/Fechin/hexo-theme-diaspora</a></p>
 
             </article>
             <hr>
