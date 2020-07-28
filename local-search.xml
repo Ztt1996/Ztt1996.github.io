@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>How to create new blog!</title>
+    <link href="/2020/07/28/blogcreate/"/>
+    <url>/2020/07/28/blogcreate/</url>
+    
+    <content type="html"><![CDATA[<p>在我踩过了不计其数的大坑，看过各种攻略，重头来过无数次，练就了三分钟速成一个新博客的神功后一定要给大家分享一下如何花最少的力气，简单快速地用hexo建立博客！话不多说，下面就开始吧！</p><p>前情提要：冲冲冲（Never give up）！</p><h2 id="Step-1：必要软件装装装！"><a href="#Step-1：必要软件装装装！" class="headerlink" title="Step 1：必要软件装装装！"></a>Step 1：必要软件装装装！</h2><p>利用hexo创建博客需要两大巨头软件：Git 和 Node</p><ol><li>git：下载地址：<a href="https://git-scm.com/" target="_blank" rel="noopener">https://git-scm.com/</a></li><li>Node: 下载地址： <a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a></li></ol><p>大家到官网下载最新版的软件就可以啦，安装也很简单，本小白就直接不停地点next就好啦~（如果有需要安装额外功能的可以百度一下它们的安装攻略）</p><h2 id="Step-2-Github-账号安排上！"><a href="#Step-2-Github-账号安排上！" class="headerlink" title="Step 2: Github 账号安排上！"></a>Step 2: Github 账号安排上！</h2><p>既然是要创建github下的博客，当然要注册一个属于自己Github账号。注册的事情这里就不详细说了，大家根据网站的注册要求一步步填写就好啦~</p><p><strong>友情提示：</strong>大家取名的时候不要太随意哦~不然后面你就会拥有一个非常非主流甚至是暴露年龄的博客网址（当事人就很后悔，非常后悔）</p><p>注册完github账号后，进入到自己的主页，网页上方会显示这么一栏</p><p><img src="C:%5CUsers%5C10442%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200728111040500.png" srcset="/img/loading.gif" alt="image-20200728111040500"></p><p>点击右边的加号：</p><p><img src="C:%5CUsers%5C10442%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200728111137950.png" srcset="/img/loading.gif" alt="image-20200728111137950"></p><p>点击：New repository，这样可以为我们的blog创建一个存储的库，以后博客相关的内容都可以在这个库里面找到，博客相应的改动也会显示在这个库里面。</p><p><img src="C:%5CUsers%5C10442%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200728111446600.png" srcset="/img/loading.gif" alt="image-20200728111446600"></p><p>这里Reposity name的格式为：username.github.io. <u>username</u>就是你的github的name， 我看到很多的攻略都是说尽量和你的github name一样，我也不知道为什么耶，经历过太多失败的我还是乖乖照做了。</p><p>然后点击 绿色的 Create repository 按钮就好啦！<img src="C:%5CUsers%5C10442%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200728111915171.png" srcset="/img/loading.gif" alt="image-20200728111915171"></p><h2 id="Step-3：环境配置冲冲冲！"><a href="#Step-3：环境配置冲冲冲！" class="headerlink" title="Step 3：环境配置冲冲冲！"></a>Step 3：环境配置冲冲冲！</h2>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>实用帖</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2020/07/27/hello-world/"/>
     <url>/2020/07/27/hello-world/</url>
