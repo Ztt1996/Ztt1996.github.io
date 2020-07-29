@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>LPP</title>
+    <link href="/2020/07/29/LPP/"/>
+    <url>/2020/07/29/LPP/</url>
+    
+    <content type="html"><![CDATA[<p>Locality Preserving Projections (LPP)</p><p>局部保留投影算法</p><h3 id="算法出处"><a href="#算法出处" class="headerlink" title="算法出处"></a>算法出处</h3>]]></content>
+    
+    
+    <categories>
+      
+      <category>降维算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>算法贴</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>基于hexo搭建Github博客--2020</title>
     <link href="/2020/07/28/blogcreate/"/>
     <url>/2020/07/28/blogcreate/</url>
