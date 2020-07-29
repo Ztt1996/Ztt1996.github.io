@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20
+      21
        分钟
     </span>
   
@@ -253,17 +253,23 @@ $ npm -v</code></pre>
 <pre><code class="hljs elixir"><span class="hljs-variable">$ </span>ssh-keygen -t rsa -C <span class="hljs-string">"你的邮箱"</span></code></pre>
 
 <p>输入后就会出现：</p>
+<p><img src="/img/page1/13.jpg" srcset="/img/loading.gif" alt=""></p>
 <p>回车：</p>
-<p>这里会提示你输入密码，可以直接回车，这样就不需要密码。回车后，就会显示：</p>
+<p><img src="/img/page1/14.png" srcset="/img/loading.gif" alt=""></p>
+<p>这里会提示你输入密码，可以直接回车，这样就不需要密码。回车后，会出来一串字符图形，显示：The key’s randomart image is ：</p>
+<p>【假装有图】</p>
 <p>这里就说明你迈过了第一座大山，生成了你的ssh密钥啦，生成的密钥藏在用户文件夹里，例如：（C:\Users\你的电脑名）。这个文件夹里会有一个新的.ssh文件夹，密钥就在id_rsa文档中，直接通过记事本打开然后复制就好啦~</p>
 <p>最后一步，把你复制的密钥和你的github链接起来。</p>
 <p>点击Settings， 在设置栏找到 SSH and GPG keys, 把刚刚复制的密钥粘过来，再Add SSH key</p>
+<p><img src="/img/11.png" srcset="/img/loading.gif" alt=""></p>
+<p>（小提示：如果大家遇到问题重头再来了，建议先把github中之前链接的ssh删掉）</p>
 <p>完成！请给自己鼓掌，增加信心~</p>
 <p><strong>小喇叭再次响起：</strong> 在创建博客的过程中多check，看看到底自己上一步是否成功了，如果成功了才能继续下一步，不然往下继续了出现了不明原因的问题，才发现又前功尽弃了，会非常难过呜呜呜呜呜（说的就是我）</p>
 <p>敲入：</p>
 <pre><code class="hljs elixir"><span class="hljs-variable">$ </span>ssh -T git<span class="hljs-variable">@github</span>.com</code></pre>
 
 <p>然后再敲入： yes 如果最后显示：</p>
+<p><img src="/img/12.png" srcset="/img/loading.gif" alt=""></p>
 <p>那么就是真的可以啦，中间的小warn可以忽略~</p>
 <h2 id="Step-4：hexo-安排！"><a href="#Step-4：hexo-安排！" class="headerlink" title="Step 4：hexo 安排！"></a>Step 4：hexo 安排！</h2><p>根据你的电脑在合适的位置新建一个myblog文件夹</p>
 <p>( 当然你也可以任意发挥取名字，叫啥名字不重要，肚子里的东西比较重要。这个文件夹以后就用来存放你博客相关的所有本地文档 啦)</p>
