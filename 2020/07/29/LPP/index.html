@@ -216,12 +216,12 @@
 <p>给定m个样本$\mathbf{x}<em>1,\mathbf{x}_2,\cdots ,\mathbf{x}_m\in \mathbb{R}^n$, 找到<strong>合适的</strong>变换矩阵<em>A</em>将着m个点映射l维的空间$\mathbf{y}_1,\mathbf{y}_2,\cdots ,\mathbf{y}_m\in \mathbb{R}^l$ ，其中：$\mathbf{y}_i=A^T\mathbf{x}_i$ 可以“代表”原始空间的信息，并且保留原本数据样本间的亲疏关系，即在原始高维空间中，某两个样本点$\mathbf{x}_i$和$\mathbf{x}_j$离得很近的话，投影到低维空间后点$\mathbf{y}_i$和$\mathbf{y}_j$也必须离的很近，算法的目标函数表示为：<br>$$<br>\min  \frac{1}{2}\sum</em>{ij}{\left( \mathbf{y}<em>i-\mathbf{y}_j \right) ^2}\mathbf{W}</em>{ij}<br>$$<br>下面将结合算法的具体步骤来说明这个目标函数的意义。</p>
 <h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><p><strong>Step 1:  Constructing the adjacency graph</strong></p>
 <p>LPP基于的是图拉普拉斯思想，首先任务是构造样本点的邻接图来分析样本点的局部信息。原论文中提供了两种确定邻接图的方法。</p>
-<p><img src="/img/lpp/1.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="/img/LPP/1.png" srcset="/img/loading.gif" alt=""></p>
 <p>第一种的方式是当两点距离小于某一指定阈值是，就认为两点邻进，但是这种方法的缺点在于阈值难以把握，当时数据的密度差异大时，很难选取统一的阈值；</p>
 <p>第二种是采用K邻接的方式，直接计算某一样本点与其它所有样本点间的距离，排序后选择离其最近的k个点作为邻近的点，并与他们一一连接。LPP构造的邻接图是对称的，例如两点$\mathbf{x}_i$和$\mathbf{x}_j$,只要有一方处于另一方的k邻近，那么两点就是连接的。</p>
 <p><strong>Step 2：Choosing the weights  $\mathbf{W}_{ij}$</strong></p>
 <p>原文中同样提供了两种方式来构造 $\mathbf{W}_{ij}$</p>
-<p><img src="/img/lpp/2.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="/img/LPP/2.png" srcset="/img/loading.gif" alt=""></p>
 <p> $\mathbf{W}_{ij}$是一个稀疏对称的矩阵。</p>
 <p>第一种方式是利用heat kernel的方式，样本点间的距离决定了权重的大小。</p>
 <p>第二种方式是直接将邻近点的权重至为1，而不邻近的样本点之间的权重之间至为0。第二种方法非常简单，但是并不能帮助区分样本点距离的亲密关系。</p>
