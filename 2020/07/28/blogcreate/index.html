@@ -230,28 +230,22 @@
 <p>输入指令</p>
 <pre><code class="hljs crmsh">$ <span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
 $ npm -v</code></pre>
-
 <p>如果安装正确，就会得到下面的版本信息，如果没有显示版本信息大家看看软件是否安装正确哟</p>
 <p><img src="/img/page1/6.png" srcset="/img/loading.gif" alt=""></p>
 <p><strong>小喇叭响起：</strong>一定要先check，我在搭建博客的过程中有几次没有check，到后面使用指令时才发现不能用，又得重头来过了呜呜呜</p>
 <p>下面正式开始配置环境，输入第一条指令：</p>
 <pre><code class="hljs routeros">$ git<span class="hljs-built_in"> config </span>--global user.name <span class="hljs-string">"Ztt"</span></code></pre>
-
 <p>（注意：Ztt的位置大家自行替换为自己的github用户名哈，然后回车enter！）</p>
 <p>输入第二条指令：</p>
 <pre><code class="hljs routeros">$ git<span class="hljs-built_in"> config </span>--global user.email <span class="hljs-string">"Ztt"</span></code></pre>
-
 <p>(注意：这里的ztt替换成大家注册github的邮箱哈！再来一个回车)</p>
 <p>生成你电脑的专属ssh密钥：</p>
 <pre><code class="hljs jboss-cli">$ <span class="hljs-keyword">cd</span>~/ <span class="hljs-string">.ssh</span></code></pre>
-
 <p>PS: 在写指令时注意空格哟</p>
 <p>如果是第一次使用git，没有生成过ssh密钥，那么按下回车后会显示：</p>
 <pre><code class="hljs stata">bash： <span class="hljs-keyword">cd</span>~/: <span class="hljs-keyword">No</span> such <span class="hljs-keyword">file</span> or directory</code></pre>
-
 <p>如果看到不要害怕，直接敲入：C为大写！</p>
 <pre><code class="hljs elixir"><span class="hljs-variable">$ </span>ssh-keygen -t rsa -C <span class="hljs-string">"你的邮箱"</span></code></pre>
-
 <p>输入后就会出现：</p>
 <p><img src="/img/page1/13.jpg" srcset="/img/loading.gif" alt=""></p>
 <p>回车：</p>
@@ -267,7 +261,6 @@ $ npm -v</code></pre>
 <p><strong>小喇叭再次响起：</strong> 在创建博客的过程中多check，看看到底自己上一步是否成功了，如果成功了才能继续下一步，不然往下继续了出现了不明原因的问题，才发现又前功尽弃了，会非常难过呜呜呜呜呜（说的就是我）</p>
 <p>敲入：</p>
 <pre><code class="hljs elixir"><span class="hljs-variable">$ </span>ssh -T git<span class="hljs-variable">@github</span>.com</code></pre>
-
 <p>然后再敲入： yes 如果最后显示：</p>
 <p><img src="/img/12.png" srcset="/img/loading.gif" alt=""></p>
 <p>那么就是真的可以啦，中间的小warn可以忽略~</p>
@@ -279,18 +272,14 @@ $ npm -v</code></pre>
 <p><img src="/img/page1/7.png" srcset="/img/loading.gif" alt=""></p>
 <p>再一次确认hexo是否安装好</p>
 <pre><code class="hljs elixir"><span class="hljs-variable">$ </span>hexo -v</code></pre>
-
 <p>如果运行后显示出了hexo的版本信息，就证明你已经完成了hexo的安装</p>
 <p>初始化hexo</p>
 <pre><code class="hljs elixir"><span class="hljs-variable">$ </span>hexo init</code></pre>
-
 <p>运行完代码显示：INFO Start blogging with Hexo！的提示就说明你已经完成了hexo的初始化，再一次给自己鼓掌~</p>
 <p>安装依赖包</p>
 <pre><code class="hljs cmake">$ npm <span class="hljs-keyword">install</span></code></pre>
-
 <p>敲入：</p>
 <pre><code class="hljs sql">$ npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save hexo-deployer-git</span></code></pre>
-
 <p>出现：</p>
 <p><img src="/img/page1/8.png" srcset="/img/loading.gif" alt=""></p>
 <p>中间的一些warn可以忽略</p>
@@ -302,11 +291,9 @@ $ npm -v</code></pre>
 <p><img src="/img/page1/10.png" srcset="/img/loading.gif" alt=""></p>
 <p>完成这些后已经翻过了第二座大山啦~可以启动本地界面，看看生成的博客呀：</p>
 <pre><code class="hljs elixir"><span class="hljs-variable">$ </span>hexo s</code></pre>
-
 <p>如果本地可以显示啦那么就说明已经成功了一大半~现在，我们需要把它发布到github上，敲入</p>
 <pre><code class="hljs elixir"><span class="hljs-variable">$ </span>hexo clean
 <span class="hljs-variable">$ </span>hexo g -d</code></pre>
-
 <p>这样等待一小会，你就可以进入博客的网址去看在线的博客啦~</p>
 <h2 id="Step-5：主题挑选（非常关键）！"><a href="#Step-5：主题挑选（非常关键）！" class="headerlink" title="Step 5：主题挑选（非常关键）！"></a>Step 5：主题挑选（非常关键）！</h2><p><a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
 <p>hexo的官网上提供了很多可以利用的主题，你可以挑选一个你喜欢的主题进行配置。但但但但但是！我给大家的建议是，在挑选好喜欢的主题后，先看看主题的配置是否麻烦，新手小白最好选择一些操作简单的主题进行配置。因为在配置过程中涉及到对blog的一些文件夹进行修改，一旦出现问题，你的文件也没有备份，很可能主题配置失败，然后又无法恢复到最初始的lanscape主题。这时不要放弃，你需要重新再来！这也就是本人为什么重复创建了很多次的原因Wuuuuuuuuuu~</p>

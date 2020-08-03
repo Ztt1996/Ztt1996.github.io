@@ -213,7 +213,9 @@
 <h2 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h2><p>LPP 可以被看做是PCA（Principal component analysis）的替代，同时与LE （Laplacian eigenmaps）及 LLE（Locally Linear Embedding）有着非常相近的性质。</p>
 <p>在日常分析过程中，我们所处理的数据往往是具有较高维度的，例如典型的人脸识别数据集如果是 $100\times 100$ 的，进行reshape操作后可能变成$10000\times 1$ ,数据维度大大增加，给运算和内存带来很大的负担。在实际中，高维的数据中往往包含着很多的冗余信息，它们的“intrinsic dimensionality” 往往是更低维的。 所以我们希望利用一些投影的方法，将高维的数据投影到一个更低维的空间，在保留原有数据包含的重要信息的同时，剔除掉冗余的信息，提高计算效率。LPP就是一个典型的降维算法，它的通过构建空间中各样本对之间的远近亲疏关系，并在降维投影中尽可能地去保留这样的亲疏关系，从而保留数据的局部结构。</p>
 <h2 id="问题说明"><a href="#问题说明" class="headerlink" title="问题说明"></a>问题说明</h2><p>LPP的基本问题可以描述为如下的形式：</p>
-<p>给定m个样本$\mathbf{x}<em>1,\mathbf{x}_2,\cdots ,\mathbf{x}_m\in \mathbb{R}^n$, 找到<strong>合适的</strong>变换矩阵<em>A</em>将着m个点映射l维的空间$\mathbf{y}_1,\mathbf{y}_2,\cdots ,\mathbf{y}_m\in \mathbb{R}^l$ ，其中：$\mathbf{y}_i=A^T\mathbf{x}_i$ 可以“代表”原始空间的信息，并且保留原本数据样本间的亲疏关系，即在原始高维空间中，某两个样本点$\mathbf{x}_i$和$\mathbf{x}_j$离得很近的话，投影到低维空间后点$\mathbf{y}_i$和$\mathbf{y}_j$也必须离的很近，算法的目标函数表示为：<br>$$<br>\min  \frac{1}{2}\sum</em>{ij}{\left( \mathbf{y}<em>i-\mathbf{y}_j \right) ^2}\mathbf{W}</em>{ij}<br>$$<br>下面将结合算法的具体步骤来说明这个目标函数的意义。</p>
+<p>给定m个样本$\mathbf{x}_1,\mathbf{x}_2,\cdots ,\mathbf{x}_m\in \mathbb{R}^n$, 找到<strong>合适的</strong>变换矩阵<em>A</em>将着m个点映射l维的空间$\mathbf{y}_1,\mathbf{y}_2,\cdots ,\mathbf{y}_m\in \mathbb{R}^l$ ，其中：$\mathbf{y}_i=A^T\mathbf{x}_i$ 可以“代表”原始空间的信息，并且保留原本数据样本间的亲疏关系，即在原始高维空间中，某两个样本点$\mathbf{x}_i$和$\mathbf{x}_j$离得很近的话，投影到低维空间后点$\mathbf{y}_i$和$\mathbf{y}_j$也必须离的很近，算法的目标函数表示为：</p>
+<script type="math/tex; mode=display">
+\min  \frac{1}{2}\sum_{ij}{\left( \mathbf{y}_i-\mathbf{y}_j \right) ^2}\mathbf{W}_{ij}</script><p>下面将结合算法的具体步骤来说明这个目标函数的意义。</p>
 <h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><p><strong>Step 1:  Constructing the adjacency graph</strong></p>
 <p>LPP基于的是图拉普拉斯思想，首先任务是构造样本点的邻接图来分析样本点的局部信息。原论文中提供了两种确定邻接图的方法。</p>
 <p><img src="/img/LPP/1.png" srcset="/img/loading.gif" alt=""></p>
