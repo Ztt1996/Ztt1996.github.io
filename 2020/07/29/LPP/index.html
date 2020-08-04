@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>基于hexo搭建Github博客--2020 - Hexo</title>
+  <title>Local preserving projection - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -152,8 +152,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-07-28 10:37">
-      2020年7月28日 上午
+    <time datetime="2020-07-29 09:22">
+      2020年7月29日 上午
     </time>
   </div>
 
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.9k 字
+      1.7k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      22
        分钟
     </span>
   
@@ -204,114 +204,86 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>在我踩过了不计其数的大坑，看过各种攻略，重头来过无数次，练就了三分钟速成一个新博客的神功后一定要给大家分享一下如何花最少的力气，简单快速地用hexo建立博客！话不多说，下面就开始吧！</p>
-<p>前情提要：冲冲冲（Never give up）！</p>
-<h2 id="Step-1：必要软件装装装！"><a href="#Step-1：必要软件装装装！" class="headerlink" title="Step 1：必要软件装装装！"></a>Step 1：必要软件装装装！</h2><p>利用hexo创建博客需要两大巨头软件：Git 和 Node</p>
-<ol>
-<li>git：下载地址：<a href="https://git-scm.com/" target="_blank" rel="noopener">https://git-scm.com/</a></li>
-<li>Node: 下载地址： <a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a></li>
-</ol>
-<p>大家到官网下载最新版的软件就可以啦，安装也很简单，本小白就直接不停地点next就好啦~（如果有需要安装额外功能的可以百度一下它们的安装攻略）</p>
-<h2 id="Step-2-Github-账号安排上！"><a href="#Step-2-Github-账号安排上！" class="headerlink" title="Step 2: Github 账号安排上！"></a>Step 2: Github 账号安排上！</h2><p>既然是要创建github下的博客，当然要注册一个属于自己Github账号。注册的事情这里就不详细说了，大家根据网站的注册要求一步步填写就好啦~</p>
-<p><strong>友情提示：</strong>大家取名的时候不要太随意哦~不然后面你就会拥有一个非常非主流甚至是暴露年龄的博客网址（当事人就很后悔，非常后悔）</p>
-<p>注册完github账号后，进入到自己的主页，网页上方会显示这么一栏</p>
-<p>点击右边的加号：</p>
-<p><img src="/img/page1/2.png" srcset="/img/loading.gif" alt=""></p>
-<p>点击：New repository，这样可以为我们的blog创建一个存储的库，以后博客相关的内容都可以在这个库里面找到，博客相应的改动也会显示在这个库里面。</p>
-<p><img src="/img/page1/1.png" srcset="/img/loading.gif" alt=""></p>
-<p>这里Reposity name的格式为：username.github.io. <u>username</u>就是你的github的name， 我看到很多的攻略都是说尽量和你的github name一样，我也不知道为什么耶，经历过太多失败的我还是乖乖照做了。</p>
-<p>然后点击 绿色的 Create repository 按钮就好啦！<img src="/img/page1/3.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="Step-3：环境配置冲冲冲！"><a href="#Step-3：环境配置冲冲冲！" class="headerlink" title="Step 3：环境配置冲冲冲！"></a>Step 3：环境配置冲冲冲！</h2><p>环境配置好，就翻过了第一步大山啦！</p>
-<p>上面我们已经完成了git 和node的安装，点击你电脑的开始菜单</p>
-<p><img src="/img/page1/4.png" srcset="/img/loading.gif" alt=""></p>
-<p>点击 git bash，进入到下面的界面</p>
-<p><img src="/img/page1/5.png" srcset="/img/loading.gif" alt=""></p>
-<p>首先，为了确保后续不出问题，让我们来check一下我们的软件是否安装好：</p>
-<p>输入指令</p>
-<pre><code class="hljs crmsh">$ <span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
-$ npm -v</code></pre>
-<p>如果安装正确，就会得到下面的版本信息，如果没有显示版本信息大家看看软件是否安装正确哟</p>
-<p><img src="/img/page1/6.png" srcset="/img/loading.gif" alt=""></p>
-<p><strong>小喇叭响起：</strong>一定要先check，我在搭建博客的过程中有几次没有check，到后面使用指令时才发现不能用，又得重头来过了呜呜呜</p>
-<p>下面正式开始配置环境，输入第一条指令：</p>
-<pre><code class="hljs routeros">$ git<span class="hljs-built_in"> config </span>--global user.name <span class="hljs-string">"Ztt"</span></code></pre>
-<p>（注意：Ztt的位置大家自行替换为自己的github用户名哈，然后回车enter！）</p>
-<p>输入第二条指令：</p>
-<pre><code class="hljs routeros">$ git<span class="hljs-built_in"> config </span>--global user.email <span class="hljs-string">"Ztt"</span></code></pre>
-<p>(注意：这里的ztt替换成大家注册github的邮箱哈！再来一个回车)</p>
-<p>生成你电脑的专属ssh密钥：</p>
-<pre><code class="hljs jboss-cli">$ <span class="hljs-keyword">cd</span>~/ <span class="hljs-string">.ssh</span></code></pre>
-<p>PS: 在写指令时注意空格哟</p>
-<p>如果是第一次使用git，没有生成过ssh密钥，那么按下回车后会显示：</p>
-<pre><code class="hljs stata">bash： <span class="hljs-keyword">cd</span>~/: <span class="hljs-keyword">No</span> such <span class="hljs-keyword">file</span> or directory</code></pre>
-<p>如果看到不要害怕，直接敲入：C为大写！</p>
-<pre><code class="hljs elixir"><span class="hljs-variable">$ </span>ssh-keygen -t rsa -C <span class="hljs-string">"你的邮箱"</span></code></pre>
-<p>输入后就会出现：</p>
-<p><img src="/img/page1/13.jpg" srcset="/img/loading.gif" alt=""></p>
-<p>回车：</p>
-<p><img src="/img/page1/14.png" srcset="/img/loading.gif" alt=""></p>
-<p>这里会提示你输入密码，可以直接回车，这样就不需要密码。回车后，会出来一串字符图形，显示：The key’s randomart image is ：</p>
-<p>【假装有图】</p>
-<p>这里就说明你迈过了第一座大山，生成了你的ssh密钥啦，生成的密钥藏在用户文件夹里，例如：（C:\Users\你的电脑名）。这个文件夹里会有一个新的.ssh文件夹，密钥就在id_rsa文档中，直接通过记事本打开然后复制就好啦~</p>
-<p>最后一步，把你复制的密钥和你的github链接起来。</p>
-<p>点击Settings， 在设置栏找到 SSH and GPG keys, 把刚刚复制的密钥粘过来，再Add SSH key</p>
-<p><img src="/img/11.png" srcset="/img/loading.gif" alt=""></p>
-<p>（小提示：如果大家遇到问题重头再来了，建议先把github中之前链接的ssh删掉）</p>
-<p>完成！请给自己鼓掌，增加信心~</p>
-<p><strong>小喇叭再次响起：</strong> 在创建博客的过程中多check，看看到底自己上一步是否成功了，如果成功了才能继续下一步，不然往下继续了出现了不明原因的问题，才发现又前功尽弃了，会非常难过呜呜呜呜呜（说的就是我）</p>
-<p>敲入：</p>
-<pre><code class="hljs elixir"><span class="hljs-variable">$ </span>ssh -T git<span class="hljs-variable">@github</span>.com</code></pre>
-<p>然后再敲入： yes 如果最后显示：</p>
-<p><img src="/img/12.png" srcset="/img/loading.gif" alt=""></p>
-<p>那么就是真的可以啦，中间的小warn可以忽略~</p>
-<h2 id="Step-4：hexo-安排！"><a href="#Step-4：hexo-安排！" class="headerlink" title="Step 4：hexo 安排！"></a>Step 4：hexo 安排！</h2><p>根据你的电脑在合适的位置新建一个myblog文件夹</p>
-<p>( 当然你也可以任意发挥取名字，叫啥名字不重要，肚子里的东西比较重要。这个文件夹以后就用来存放你博客相关的所有本地文档 啦)</p>
-<p>点击文件夹，右键，Git bash，开冲！</p>
-<p>由于hexo程序和下载的git，node都是一直在更新的，而我们看的攻略往往不有一段时间的，所以建议大家直接去hexo的官网查找最新的hexo安装指令：<a href="https://hexo.io/" target="_blank" rel="noopener">https://hexo.io/</a></p>
-<p>我安装的时候最新的指令是这样滴：</p>
-<p><img src="/img/page1/7.png" srcset="/img/loading.gif" alt=""></p>
-<p>再一次确认hexo是否安装好</p>
-<pre><code class="hljs elixir"><span class="hljs-variable">$ </span>hexo -v</code></pre>
-<p>如果运行后显示出了hexo的版本信息，就证明你已经完成了hexo的安装</p>
-<p>初始化hexo</p>
-<pre><code class="hljs elixir"><span class="hljs-variable">$ </span>hexo init</code></pre>
-<p>运行完代码显示：INFO Start blogging with Hexo！的提示就说明你已经完成了hexo的初始化，再一次给自己鼓掌~</p>
-<p>安装依赖包</p>
-<pre><code class="hljs cmake">$ npm <span class="hljs-keyword">install</span></code></pre>
-<p>敲入：</p>
-<pre><code class="hljs sql">$ npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save hexo-deployer-git</span></code></pre>
-<p>出现：</p>
-<p><img src="/img/page1/8.png" srcset="/img/loading.gif" alt=""></p>
-<p>中间的一些warn可以忽略</p>
-<p>接下来打开myblog文件夹中的_config.yml文件，可以只用文档打开~</p>
-<p>拉到最下面进行修改：</p>
-<p><img src="/img/page1/9.png" srcset="/img/loading.gif" alt=""></p>
-<p><strong>小喇叭再次响起：</strong>这里需要格外注意不要乱修改缩进，然后type，repo，branch的冒号后面都需要有一个空格。</p>
-<p>repo后面填的内容可以直接去你的github网页中进入到博客对应的repository中去，点击code进行复制：</p>
-<p><img src="/img/page1/10.png" srcset="/img/loading.gif" alt=""></p>
-<p>完成这些后已经翻过了第二座大山啦~可以启动本地界面，看看生成的博客呀：</p>
-<pre><code class="hljs elixir"><span class="hljs-variable">$ </span>hexo s</code></pre>
-<p>如果本地可以显示啦那么就说明已经成功了一大半~现在，我们需要把它发布到github上，敲入</p>
-<pre><code class="hljs elixir"><span class="hljs-variable">$ </span>hexo clean
-<span class="hljs-variable">$ </span>hexo g -d</code></pre>
-<p>这样等待一小会，你就可以进入博客的网址去看在线的博客啦~</p>
-<h2 id="Step-5：主题挑选（非常关键）！"><a href="#Step-5：主题挑选（非常关键）！" class="headerlink" title="Step 5：主题挑选（非常关键）！"></a>Step 5：主题挑选（非常关键）！</h2><p><a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
-<p>hexo的官网上提供了很多可以利用的主题，你可以挑选一个你喜欢的主题进行配置。但但但但但是！我给大家的建议是，在挑选好喜欢的主题后，先看看主题的配置是否麻烦，新手小白最好选择一些操作简单的主题进行配置。因为在配置过程中涉及到对blog的一些文件夹进行修改，一旦出现问题，你的文件也没有备份，很可能主题配置失败，然后又无法恢复到最初始的lanscape主题。这时不要放弃，你需要重新再来！这也就是本人为什么重复创建了很多次的原因Wuuuuuuuuuu~</p>
-<p>这里给大家提供几个简单易配置的主题，大家可以试试手哟~</p>
-<p><a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="noopener">https://github.com/fluid-dev/hexo-theme-fluid</a></p>
-<p><a href="https://github.com/izhaoo/hexo-theme-zhaoo" target="_blank" rel="noopener">https://github.com/izhaoo/hexo-theme-zhaoo</a></p>
-<p><a href="https://github.com/Fechin/hexo-theme-diaspora" target="_blank" rel="noopener">https://github.com/Fechin/hexo-theme-diaspora</a></p>
+              <p>Locality Preserving Projections (LPP)</p>
+<p>局部保留投影算法</p>
+<h2 id="算法出处"><a href="#算法出处" class="headerlink" title="算法出处"></a>算法出处</h2><p>出自何晓飞老师2003的文章</p>
+<p>He, Xiaofei and Partha Niyogi. “Locality Preserving Projections.” <em>NIPS</em> (2003).</p>
+<p>下载网址：</p>
+<p><a href="https://www.semanticscholar.org/paper/Locality-Preserving-Projections-He-Niyogi/75335244b49f4d1bb27aa51f1690bbefbbe1c3d1" target="_blank" rel="noopener">https://www.semanticscholar.org/paper/Locality-Preserving-Projections-He-Niyogi/75335244b49f4d1bb27aa51f1690bbefbbe1c3d1</a></p>
+<h2 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h2><p>LPP 可以被看做是PCA（Principal component analysis）的替代，同时与LE （Laplacian eigenmaps）及 LLE（Locally Linear Embedding）有着非常相近的性质。</p>
+<p>在日常分析过程中，我们所处理的数据往往是具有较高维度的，例如典型的人脸识别数据集如果是 $100\times 100$ 的，进行reshape操作后可能变成$10000\times 1$ ,数据维度大大增加，给运算和内存带来很大的负担。在实际中，高维的数据中往往包含着很多的冗余信息，它们的“intrinsic dimensionality” 往往是更低维的。 所以我们希望利用一些投影的方法，将高维的数据投影到一个更低维的空间，在保留原有数据包含的重要信息的同时，剔除掉冗余的信息，提高计算效率。LPP就是一个典型的降维算法，它的通过构建空间中各样本对之间的远近亲疏关系，并在降维投影中尽可能地去保留这样的亲疏关系，从而保留数据的局部结构。</p>
+<h2 id="问题说明"><a href="#问题说明" class="headerlink" title="问题说明"></a>问题说明</h2><p>LPP的基本问题可以描述为如下的形式：</p>
+<p>给定m个样本$\mathbf{x}_1,\mathbf{x}_2,\cdots ,\mathbf{x}_m\in \mathbb{R}^n$, 找到<strong>合适的</strong>变换矩阵<em>A</em>将着m个点映射l维的空间$\mathbf{y}_1,\mathbf{y}_2,\cdots ,\mathbf{y}_m\in \mathbb{R}^l$ ，其中：$\mathbf{y}_i=A^T\mathbf{x}_i$ 可以“代表”原始空间的信息，并且保留原本数据样本间的亲疏关系，即在原始高维空间中，某两个样本点$\mathbf{x}_i$和$\mathbf{x}_j$离得很近的话，投影到低维空间后点$\mathbf{y}_i$和$\mathbf{y}_j$也必须离的很近，算法的目标函数表示为：</p>
+<script type="math/tex; mode=display">
+\min  \frac{1}{2}\sum_{ij}{\left( \mathbf{y}_i-\mathbf{y}_j \right) ^2}\mathbf{W}_{ij}</script><p>下面将结合算法的具体步骤来说明这个目标函数的意义。</p>
+<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><p><strong>Step 1:  Constructing the adjacency graph</strong></p>
+<p>LPP基于的是图拉普拉斯思想，首先任务是构造样本点的邻接图来分析样本点的局部信息。原论文中提供了两种确定邻接图的方法。</p>
+<p><img src="/img/LPP/1.png" srcset="/img/loading.gif" alt=""></p>
+<p>第一种的方式是当两点距离小于某一指定阈值是，就认为两点邻进，但是这种方法的缺点在于阈值难以把握，当时数据的密度差异大时，很难选取统一的阈值；</p>
+<p>第二种是采用K邻接的方式，直接计算某一样本点与其它所有样本点间的距离，排序后选择离其最近的k个点作为邻近的点，并与他们一一连接。LPP构造的邻接图是对称的，例如两点$\mathbf{x}_i$和$\mathbf{x}_j$,只要有一方处于另一方的k邻近，那么两点就是连接的。</p>
+<p><strong>Step 2：Choosing the weights  $\mathbf{W}_{ij}$</strong></p>
+<p>同样，原文中提供了两种方式来构造 $\mathbf{W}_{ij}$</p>
+<p><img src="/img/LPP/2.png" srcset="/img/loading.gif" alt=""></p>
+<p>第一种构造方式利用了heat kernel 来根据样本点之间的欧式距离确定相应权重 $\mathbf{W}_{ij}$。距离越近，权重越大，距离越小，权重越大。</p>
+<p>第二种构造方式非常简单，只要两个样本点是邻近的，则将样本点之间的权重至为1。这样的构造方式虽然简单，但是并不能很好地区分样本点间的亲疏关系。</p>
+<p>例如，现有一组数据{1，3，10，15}，选取邻近k=2。对于样本点3，点1和10都为其邻近点，根据第二种构造方式$\mathbf{W}_{1,3}={W}_{10,3}$， 均为1。这样可能造成投影后的样本点$\mathbf{y}_1$和$\mathbf{y}_3$距离投影后的样本点10是一样近的。显然这并不是我们期望的，所以实际应用时往往采用第一种构造方式。</p>
+<p><strong>Step 3：目标函数求解</strong></p>
+<p>介绍完权重$\mathbf{W}_{ij}$的确定方式，这里回到LPP的目标函数，理解目标函数的意义。</p>
+<script type="math/tex; mode=display">
+\min  \frac{1}{2}\sum_{ij}{\left( \mathbf{y}_i-\mathbf{y}_j \right) ^2}\mathbf{W}_{ij}</script><p>当原始样本点$\mathbf{x}_i$和$\mathbf{x}_j$距离很近时，</p>
+<p>对应的权重$\mathbf{W}_{ij}$很大，为了满足最小化的目标，此时会使得投影后的样本点$\mathbf{y}_i$和$\mathbf{y}_j$也距离很近。</p>
+<p>当原始样本点$\mathbf{x}_i$和$\mathbf{x}_j$距离很远时，</p>
+<p>对应的权重$\mathbf{W}_{ij}$较小，对于$\mathbf{y}_i$和$\mathbf{y}_j$的约束较小。当二者距离足够远时，对应权重为0，自然满足目标函数。</p>
+<p><strong>目标函数可以进一步推导为：</strong></p>
+<script type="math/tex; mode=display">
+\begin{array}{c}
+    \min \frac{1}{2}\sum_{ij}{\left( \mathbf{y}_i-\mathbf{y}_j \right) ^2}\mathbf{w}_{ij}=\min \frac{1}{2}\sum_{ij}{\left( \mathbf{A}^T\mathbf{x}_i-\mathbf{A}^T\mathbf{x}_j \right) ^2}\mathbf{w}_{ij}\\
+    =\min \sum_i{\mathbf{A}^T}\mathbf{x}_iD_{ii}\mathbf{x}_{i}^{T}\mathbf{A}-\sum_{ij}{\mathbf{A}^T}\mathbf{x}_i\mathbf{w}_{ij}\mathbf{x}_{j}^{T}\mathbf{A}=\min  \mathbf{a}^T\mathbf{X}\left( \mathbf{D}-\mathbf{W} \right) \mathbf{X}^T\mathbf{a}\\
+    =\min  \mathbf{a}^T\mathbf{XLX}^T\mathbf{a}\\
+\end{array}</script><p>其中L=D-W称为Laplacian matrix。其中：</p>
+<script type="math/tex; mode=display">
+\mathbf{D}_{ii}=\sum_j{\mathbf{W}_{ij}}</script><p>$\mathbf{D}_{ii}$越大，说明$\mathbf{y}_i$越“重要”。所以引入约束：</p>
+<script type="math/tex; mode=display">
+\mathbf{A}^T\mathbf{XDX}^T\mathbf{A}=1</script><p>最终目标函数表示为：</p>
+<script type="math/tex; mode=display">
+\min  \mathbf{A}^T\mathbf{XLX}^T\mathbf{A}</script><script type="math/tex; mode=display">
+s.t. \mathbf{A}^T\mathbf{XDX}^T\mathbf{A}=1</script><p>上述形势的目标函数，可以简单地转化为特征值分解来求解：</p>
+<script type="math/tex; mode=display">
+\mathbf{XLX}^T\mathbf{A}=\lambda \mathbf{XDX}^T\mathbf{A}</script><h2 id="LPP与PCA的关系"><a href="#LPP与PCA的关系" class="headerlink" title="LPP与PCA的关系"></a>LPP与PCA的关系</h2><p>PCA有与上述LPP相应的目标函数</p>
+<script type="math/tex; mode=display">
+PCA\text{：} \max  \mathbf{A}^T\mathbf{XX}^T\mathbf{A}</script><script type="math/tex; mode=display">
+\,\,s.t. \mathbf{A}^T\mathbf{A}=1</script><script type="math/tex; mode=display">
+\text{求解：}\mathbf{XX}^T\mathbf{A}=\lambda \mathbf{A}\left( \mathbf{XX}^T\mathbf{XX}^T\mathbf{A}=\lambda \mathbf{XX}^T\mathbf{A} \right)</script><script type="math/tex; mode=display">
+\Rightarrow \max \frac{\mathbf{A}^T\mathbf{XWX}^T\mathbf{A}}{\mathbf{A}^T\mathbf{XDX}^T\mathbf{A}}</script><script type="math/tex; mode=display">
+\text{其中：}\mathbf{W}=\mathbf{X}^T\mathbf{X}\text{，}\mathbf{D}=\mathbf{I}</script><p>由此PCA可以近似地看作“特殊”的LPP。与LPP关注样本点的局部信息不同，PCA关注的是样本的<strong>全局方差信息</strong>。</p>
+<h2 id="结果比较"><a href="#结果比较" class="headerlink" title="结果比较"></a>结果比较</h2><p><img src="/img/LPP/3.png" srcset="/img/loading.gif" alt="">  </p>
+<p><img src="/img/LPP/4.png" srcset="/img/loading.gif" alt="">   </p>
+<p><img src="/img/LPP/5.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="相关应用"><a href="#相关应用" class="headerlink" title="相关应用"></a>相关应用</h2><p>有相关学者将LPP和PCA进行了结合来同时考虑样本的全局信息和局部信息，这里就不详细叙述，如果有兴趣的话，大家可以查阅下面的三篇篇文献：</p>
+<p>Local and global principal component analysis for process monitoring</p>
+<p><a href="https://www.sciencedirect.com/science/article/pii/S0959152412001497" target="_blank" rel="noopener">https://www.sciencedirect.com/science/article/pii/S0959152412001497</a></p>
+<p>Process Monitoring with Global−Local Preserving Projections</p>
+<p><a href="https://pubs.acs.org/doi/10.1021/ie4039345" target="_blank" rel="noopener">https://pubs.acs.org/doi/10.1021/ie4039345</a></p>
+<p>Nonlinear process monitoring based on kernel global–local preservingprojections</p>
+<p><a href="https://www.sciencedirect.com/science/article/pii/S0959152415002310" target="_blank" rel="noopener">https://www.sciencedirect.com/science/article/pii/S0959152415002310</a></p>
 
             </article>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95/">降维算法</a>
+                    
+                  </div>
+                
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%AE%9E%E7%94%A8%E5%B8%96/">实用帖</a>
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95%E8%B4%B4/">算法贴</a>
                     
                   </div>
                 
@@ -324,18 +296,12 @@ $ npm -v</code></pre>
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/29/LPP/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Local preserving projection</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/27/hello-world/">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2020/07/28/blogcreate/">
+                        <span class="hidden-mobile">基于hexo搭建Github博客--2020</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -474,7 +440,7 @@ $ npm -v</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "基于hexo搭建Github博客--2020&nbsp;",
+        "Local preserving projection&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
