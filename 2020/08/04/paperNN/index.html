@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>Local preserving projection - Hexo</title>
+  <title>Neural network and PCA for process monitoring - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -152,8 +152,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-07-29 09:22">
-      2020年7月29日 上午
+    <time datetime="2020-08-04 11:11">
+      2020年8月4日 上午
     </time>
   </div>
 
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      22 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      22
+      1
        分钟
     </span>
   
@@ -204,68 +204,8 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <p>Locality Preserving Projections (LPP)</p>
-<p>局部保留投影算法</p>
-<h2 id="算法出处"><a href="#算法出处" class="headerlink" title="算法出处"></a>算法出处</h2><p>出自何晓飞老师2003的文章</p>
-<p>He, Xiaofei and Partha Niyogi. “Locality Preserving Projections.” <em>NIPS</em> (2003).</p>
-<p>下载网址：</p>
-<p><a href="https://www.semanticscholar.org/paper/Locality-Preserving-Projections-He-Niyogi/75335244b49f4d1bb27aa51f1690bbefbbe1c3d1" target="_blank" rel="noopener">https://www.semanticscholar.org/paper/Locality-Preserving-Projections-He-Niyogi/75335244b49f4d1bb27aa51f1690bbefbbe1c3d1</a></p>
-<h2 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h2><p>LPP 可以被看做是PCA（Principal component analysis）的替代，同时与LE （Laplacian eigenmaps）及 LLE（Locally Linear Embedding）有着非常相近的性质。</p>
-<p>在日常分析过程中，我们所处理的数据往往是具有较高维度的，例如典型的人脸识别数据集如果是 $100\times 100$ 的，进行reshape操作后可能变成$10000\times 1$ ,数据维度大大增加，给运算和内存带来很大的负担。在实际中，高维的数据中往往包含着很多的冗余信息，它们的“intrinsic dimensionality” 往往是更低维的。 所以我们希望利用一些投影的方法，将高维的数据投影到一个更低维的空间，在保留原有数据包含的重要信息的同时，剔除掉冗余的信息，提高计算效率。LPP就是一个典型的降维算法，它的通过构建空间中各样本对之间的远近亲疏关系，并在降维投影中尽可能地去保留这样的亲疏关系，从而保留数据的局部结构。</p>
-<h2 id="问题说明"><a href="#问题说明" class="headerlink" title="问题说明"></a>问题说明</h2><p>LPP的基本问题可以描述为如下的形式：</p>
-<p>给定m个样本$\mathbf{x}_1,\mathbf{x}_2,\cdots ,\mathbf{x}_m\in \mathbb{R}^n$, 找到<strong>合适的</strong>变换矩阵<em>A</em>将着m个点映射l维的空间$\mathbf{y}_1,\mathbf{y}_2,\cdots ,\mathbf{y}_m\in \mathbb{R}^l$ ，其中：$\mathbf{y}_i=A^T\mathbf{x}_i$ 可以“代表”原始空间的信息，并且保留原本数据样本间的亲疏关系，即在原始高维空间中，某两个样本点$\mathbf{x}_i$和$\mathbf{x}_j$离得很近的话，投影到低维空间后点$\mathbf{y}_i$和$\mathbf{y}_j$也必须离的很近，算法的目标函数表示为：</p>
-<script type="math/tex; mode=display">
-\min  \frac{1}{2}\sum_{ij}{\left( \mathbf{y}_i-\mathbf{y}_j \right) ^2}\mathbf{W}_{ij}</script><p>下面将结合算法的具体步骤来说明这个目标函数的意义。</p>
-<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><p><strong>Step 1:  Constructing the adjacency graph</strong></p>
-<p>LPP基于的是图拉普拉斯思想，首先任务是构造样本点的邻接图来分析样本点的局部信息。原论文中提供了两种确定邻接图的方法。</p>
-<p><img src="/img/LPP/1.png" srcset="/img/loading.gif" alt=""></p>
-<p>第一种的方式是当两点距离小于某一指定阈值是，就认为两点邻进，但是这种方法的缺点在于阈值难以把握，当时数据的密度差异大时，很难选取统一的阈值；</p>
-<p>第二种是采用K邻接的方式，直接计算某一样本点与其它所有样本点间的距离，排序后选择离其最近的k个点作为邻近的点，并与他们一一连接。LPP构造的邻接图是对称的，例如两点$\mathbf{x}_i$和$\mathbf{x}_j$,只要有一方处于另一方的k邻近，那么两点就是连接的。</p>
-<p><strong>Step 2：Choosing the weights  $\mathbf{W}_{ij}$</strong></p>
-<p>同样，原文中提供了两种方式来构造 $\mathbf{W}_{ij}$</p>
-<p><img src="/img/LPP/2.png" srcset="/img/loading.gif" alt=""></p>
-<p>第一种构造方式利用了heat kernel 来根据样本点之间的欧式距离确定相应权重 $\mathbf{W}_{ij}$。距离越近，权重越大，距离越小，权重越大。</p>
-<p>第二种构造方式非常简单，只要两个样本点是邻近的，则将样本点之间的权重至为1。这样的构造方式虽然简单，但是并不能很好地区分样本点间的亲疏关系。</p>
-<p>例如，现有一组数据{1，3，10，15}，选取邻近k=2。对于样本点3，点1和10都为其邻近点，根据第二种构造方式$\mathbf{W}_{1,3}={W}_{10,3}$， 均为1。这样可能造成投影后的样本点$\mathbf{y}_1$和$\mathbf{y}_3$距离投影后的样本点10是一样近的。显然这并不是我们期望的，所以实际应用时往往采用第一种构造方式。</p>
-<p><strong>Step 3：目标函数求解</strong></p>
-<p>介绍完权重$\mathbf{W}_{ij}$的确定方式，这里回到LPP的目标函数，理解目标函数的意义。</p>
-<script type="math/tex; mode=display">
-\min  \frac{1}{2}\sum_{ij}{\left( \mathbf{y}_i-\mathbf{y}_j \right) ^2}\mathbf{W}_{ij}</script><p>当原始样本点$\mathbf{x}_i$和$\mathbf{x}_j$距离很近时，</p>
-<p>对应的权重$\mathbf{W}_{ij}$很大，为了满足最小化的目标，此时会使得投影后的样本点$\mathbf{y}_i$和$\mathbf{y}_j$也距离很近。</p>
-<p>当原始样本点$\mathbf{x}_i$和$\mathbf{x}_j$距离很远时，</p>
-<p>对应的权重$\mathbf{W}_{ij}$较小，对于$\mathbf{y}_i$和$\mathbf{y}_j$的约束较小。当二者距离足够远时，对应权重为0，自然满足目标函数。</p>
-<p><strong>目标函数可以进一步推导为：</strong></p>
-<script type="math/tex; mode=display">
-\begin{array}{c}
-    \min \frac{1}{2}\sum_{ij}{\left( \mathbf{y}_i-\mathbf{y}_j \right) ^2}\mathbf{w}_{ij}=\min \frac{1}{2}\sum_{ij}{\left( \mathbf{A}^T\mathbf{x}_i-\mathbf{A}^T\mathbf{x}_j \right) ^2}\mathbf{w}_{ij}\\
-    =\min \sum_i{\mathbf{A}^T}\mathbf{x}_iD_{ii}\mathbf{x}_{i}^{T}\mathbf{A}-\sum_{ij}{\mathbf{A}^T}\mathbf{x}_i\mathbf{w}_{ij}\mathbf{x}_{j}^{T}\mathbf{A}=\min  \mathbf{a}^T\mathbf{X}\left( \mathbf{D}-\mathbf{W} \right) \mathbf{X}^T\mathbf{a}\\
-    =\min  \mathbf{a}^T\mathbf{XLX}^T\mathbf{a}\\
-\end{array}</script><p>其中L=D-W称为Laplacian matrix。其中：</p>
-<script type="math/tex; mode=display">
-\mathbf{D}_{ii}=\sum_j{\mathbf{W}_{ij}}</script><p>$\mathbf{D}_{ii}$越大，说明$\mathbf{y}_i$越“重要”。所以引入约束：</p>
-<script type="math/tex; mode=display">
-\mathbf{A}^T\mathbf{XDX}^T\mathbf{A}=1</script><p>最终目标函数表示为：</p>
-<script type="math/tex; mode=display">
-\min  \mathbf{A}^T\mathbf{XLX}^T\mathbf{A}</script><script type="math/tex; mode=display">
-s.t. \mathbf{A}^T\mathbf{XDX}^T\mathbf{A}=1</script><p>上述形势的目标函数，可以简单地转化为特征值分解来求解：</p>
-<script type="math/tex; mode=display">
-\mathbf{XLX}^T\mathbf{A}=\lambda \mathbf{XDX}^T\mathbf{A}</script><h2 id="LPP与PCA的关系"><a href="#LPP与PCA的关系" class="headerlink" title="LPP与PCA的关系"></a>LPP与PCA的关系</h2><p>PCA有与上述LPP相应的目标函数</p>
-<script type="math/tex; mode=display">
-PCA\text{：} \max  \mathbf{A}^T\mathbf{XX}^T\mathbf{A}</script><script type="math/tex; mode=display">
-\,\,s.t. \mathbf{A}^T\mathbf{A}=1</script><script type="math/tex; mode=display">
-\text{求解：}\mathbf{XX}^T\mathbf{A}=\lambda \mathbf{A}\left( \mathbf{XX}^T\mathbf{XX}^T\mathbf{A}=\lambda \mathbf{XX}^T\mathbf{A} \right)</script><script type="math/tex; mode=display">
-\Rightarrow \max \frac{\mathbf{A}^T\mathbf{XWX}^T\mathbf{A}}{\mathbf{A}^T\mathbf{XDX}^T\mathbf{A}}</script><script type="math/tex; mode=display">
-\text{其中：}\mathbf{W}=\mathbf{X}^T\mathbf{X}\text{，}\mathbf{D}=\mathbf{I}</script><p>由此PCA可以近似地看作“特殊”的LPP。与LPP关注样本点的局部信息不同，PCA关注的是样本的<strong>全局方差信息</strong>。</p>
-<h2 id="结果比较"><a href="#结果比较" class="headerlink" title="结果比较"></a>结果比较</h2><p><img src="/img/LPP/3.png" srcset="/img/loading.gif" alt="">  </p>
-<p><img src="/img/LPP/4.png" srcset="/img/loading.gif" alt="">   </p>
-<p><img src="/img/LPP/5.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="相关应用"><a href="#相关应用" class="headerlink" title="相关应用"></a>相关应用</h2><p>有相关学者将LPP和PCA进行了结合来同时考虑样本的全局信息和局部信息，这里就不详细叙述，如果有兴趣的话，大家可以查阅下面的三篇篇文献：</p>
-<p>Local and global principal component analysis for process monitoring</p>
-<p><a href="https://www.sciencedirect.com/science/article/pii/S0959152412001497" target="_blank" rel="noopener">https://www.sciencedirect.com/science/article/pii/S0959152412001497</a></p>
-<p>Process Monitoring with Global−Local Preserving Projections</p>
-<p><a href="https://pubs.acs.org/doi/10.1021/ie4039345" target="_blank" rel="noopener">https://pubs.acs.org/doi/10.1021/ie4039345</a></p>
-<p>Nonlinear process monitoring based on kernel global–local preservingprojections</p>
-<p><a href="https://www.sciencedirect.com/science/article/pii/S0959152415002310" target="_blank" rel="noopener">https://www.sciencedirect.com/science/article/pii/S0959152415002310</a></p>
+              <h2 id="Dynamic-process-fault-monitoring-based-on-neural-network-and-PCA"><a href="#Dynamic-process-fault-monitoring-based-on-neural-network-and-PCA" class="headerlink" title="Dynamic process fault monitoring based on neural network and PCA"></a>Dynamic process fault monitoring based on neural network and PCA</h2><p>文章出处：</p>
+<p><a href="https://www.sciencedirect.com/science/article/pii/S0959152401000270" target="_blank" rel="noopener">https://www.sciencedirect.com/science/article/pii/S0959152401000270</a></p>
 
             </article>
             <hr>
@@ -275,7 +215,7 @@ PCA\text{：} \max  \mathbf{A}^T\mathbf{XX}^T\mathbf{A}</script><script type="ma
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%AB%A0/">文章</a>
                     
                   </div>
                 
@@ -283,7 +223,7 @@ PCA\text{：} \max  \mathbf{A}^T\mathbf{XX}^T\mathbf{A}</script><script type="ma
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95/">降维算法</a>
+                      <a class="hover-with-bg" href="/tags/%E8%BF%87%E7%A8%8B%E7%9B%91%E6%B5%8B%EF%BC%8C%E9%9D%9E%E7%BA%BF%E6%80%A7/">过程监测，非线性</a>
                     
                   </div>
                 
@@ -296,9 +236,9 @@ PCA\text{：} \max  \mathbf{A}^T\mathbf{XX}^T\mathbf{A}</script><script type="ma
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/04/paperNN/">
+                      <a href="/2020/08/04/CCA/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Neural network and PCA for process monitoring</span>
+                        <span class="hidden-mobile">A Survey on CCA</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -306,8 +246,8 @@ PCA\text{：} \max  \mathbf{A}^T\mathbf{XX}^T\mathbf{A}</script><script type="ma
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/28/blogcreate/">
-                        <span class="hidden-mobile">基于hexo搭建Github博客--2020</span>
+                      <a href="/2020/07/29/LPP/">
+                        <span class="hidden-mobile">Local preserving projection</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -446,7 +386,7 @@ PCA\text{：} \max  \mathbf{A}^T\mathbf{XX}^T\mathbf{A}</script><script type="ma
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Local preserving projection&nbsp;",
+        "Neural network and PCA for process monitoring&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

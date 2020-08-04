@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>A Survey on CCA</title>
+    <link href="/2020/08/04/CCA/"/>
+    <url>/2020/08/04/CCA/</url>
+    
+    <content type="html"><![CDATA[<h2 id="A-Survey-on-Canonical-Correlation-Analysis"><a href="#A-Survey-on-Canonical-Correlation-Analysis" class="headerlink" title="A Survey on Canonical Correlation Analysis"></a>A Survey on Canonical Correlation Analysis</h2><p>文章出处：</p><p><a href="https://ieeexplore.ieee.org/document/8928538" target="_blank" rel="noopener">https://ieeexplore.ieee.org/document/8928538</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>文章</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>降维算法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Neural network and PCA for process monitoring</title>
+    <link href="/2020/08/04/paperNN/"/>
+    <url>/2020/08/04/paperNN/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Dynamic-process-fault-monitoring-based-on-neural-network-and-PCA"><a href="#Dynamic-process-fault-monitoring-based-on-neural-network-and-PCA" class="headerlink" title="Dynamic process fault monitoring based on neural network and PCA"></a>Dynamic process fault monitoring based on neural network and PCA</h2><p>文章出处：</p><p><a href="https://www.sciencedirect.com/science/article/pii/S0959152401000270" target="_blank" rel="noopener">https://www.sciencedirect.com/science/article/pii/S0959152401000270</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>文章</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>过程监测，非线性</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Local preserving projection</title>
     <link href="/2020/07/29/LPP/"/>
     <url>/2020/07/29/LPP/</url>
@@ -13,14 +63,14 @@
     
     <categories>
       
-      <category>降维算法</category>
+      <category>算法</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>算法贴</tag>
+      <tag>降维算法</tag>
       
     </tags>
     
