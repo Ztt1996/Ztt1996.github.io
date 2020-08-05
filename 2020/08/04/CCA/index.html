@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      16 字
+      401 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      5
        分钟
     </span>
   
@@ -204,8 +204,24 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="A-Survey-on-Canonical-Correlation-Analysis"><a href="#A-Survey-on-Canonical-Correlation-Analysis" class="headerlink" title="A Survey on Canonical Correlation Analysis"></a>A Survey on Canonical Correlation Analysis</h2><p>文章出处：</p>
+              <h3 id="A-Survey-on-Canonical-Correlation-Analysis（CCA）"><a href="#A-Survey-on-Canonical-Correlation-Analysis（CCA）" class="headerlink" title="A Survey on Canonical Correlation Analysis（CCA）"></a>A Survey on Canonical Correlation Analysis（CCA）</h3><p>文章出处：</p>
 <p><a href="https://ieeexplore.ieee.org/document/8928538" target="_blank" rel="noopener">https://ieeexplore.ieee.org/document/8928538</a></p>
+<p>这篇文章讨论了关于CCA发展至今衍生出的七大类基于CCA的改进方法，首先一张图先带大家了解一下关于CCA的发展史：</p>
+<p><img src="/img/CCA/1.png" srcset="/img/loading.gif" alt=""></p>
+<p>下面就开始吧~</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>文章的Introduction从CCA展开，逐一介绍七大类CCA改进方法的发展现状。</p>
+<ol>
+<li>Deep CCA 将CCA与深度神经网络结合来挖掘两组不同变量间所蕴含的非线性关系，其最早是在1994年被提出来的，有学者利用多层感知机来近似CCA中的非线性映射。随着神经网络的方法，越来越多的深度学习方法与CCA进行了结合，结合的策略也日趋多样化。</li>
+</ol>
+<h2 id="CCA"><a href="#CCA" class="headerlink" title="CCA"></a>CCA</h2><h2 id="Muti-view-CCA"><a href="#Muti-view-CCA" class="headerlink" title="Muti-view CCA"></a>Muti-view CCA</h2><h3 id="Pair-wise-correlation"><a href="#Pair-wise-correlation" class="headerlink" title="Pair-wise correlation"></a>Pair-wise correlation</h3><h3 id="Zero-order-correlation"><a href="#Zero-order-correlation" class="headerlink" title="Zero-order-correlation"></a>Zero-order-correlation</h3><h3 id="High-order-correlation"><a href="#High-order-correlation" class="headerlink" title="High-order correlation"></a>High-order correlation</h3><h2 id="Probabilistic-CCA"><a href="#Probabilistic-CCA" class="headerlink" title="Probabilistic CCA"></a>Probabilistic CCA</h2><h3 id="Bayesian-CCA"><a href="#Bayesian-CCA" class="headerlink" title="Bayesian CCA"></a>Bayesian CCA</h3><h2 id="Deep-CCA"><a href="#Deep-CCA" class="headerlink" title="Deep CCA"></a>Deep CCA</h2><h3 id="DNN-CCA"><a href="#DNN-CCA" class="headerlink" title="DNN + CCA"></a>DNN + CCA</h3><p>这里介绍由Andrew等学者在2013年的文章：</p>
+<p><u>G. Andrew, R. Arora, J. Bilmes, and K. Livescu, “Deep canonical correlation analysis,” in Proc. Int. Conf. Mach. Learn. (ICML), 2013, pp. 1247–1255.</u></p>
+<p>提出的一种较为典型的DNN与CCA结合的算法。</p>
+<p>算法的思想比较简单，对于两组不同的变量$\mathbf{X}^1$和$\mathbf{X}^2$,将其分别输入两个DNNs进行特征提取得到$f_1\left( \mathbf{X}^1 \right)$ 和$f_2\left( \mathbf{X}^2 \right)$，作为CCA的输入，最终得到如下的目标函数：</p>
+<p><img src="/img/CCA/3.png" srcset="/img/loading.gif" alt=""></p>
+<p>整个算法的框架可以表示为：</p>
+<p><img src="/img/CCA/4.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="Auto-Encoder-AE-CCA"><a href="#Auto-Encoder-AE-CCA" class="headerlink" title="Auto-Encoder (AE) + CCA"></a>Auto-Encoder (AE) + CCA</h3><h3 id="Convolutional-networks-CCA"><a href="#Convolutional-networks-CCA" class="headerlink" title="Convolutional networks + CCA"></a>Convolutional networks + CCA</h3><h2 id="Kernel-CCA"><a href="#Kernel-CCA" class="headerlink" title="Kernel CCA"></a>Kernel CCA</h2><h3 id="The-naive-application-of-Kernel-CCA"><a href="#The-naive-application-of-Kernel-CCA" class="headerlink" title="The naive application of Kernel CCA"></a>The naive application of Kernel CCA</h3><h3 id="Regularization-Kernel-CCA"><a href="#Regularization-Kernel-CCA" class="headerlink" title="Regularization Kernel CCA"></a>Regularization Kernel CCA</h3><h3 id="Non-regularization-Kernel-CCA"><a href="#Non-regularization-Kernel-CCA" class="headerlink" title="Non-regularization Kernel CCA"></a>Non-regularization Kernel CCA</h3><h2 id="Discriminative-CCA"><a href="#Discriminative-CCA" class="headerlink" title="Discriminative CCA"></a>Discriminative CCA</h2><h3 id="Global-Discriminative-CCA"><a href="#Global-Discriminative-CCA" class="headerlink" title="Global Discriminative CCA"></a>Global Discriminative CCA</h3><h3 id="Local-Discriminative-CCA"><a href="#Local-Discriminative-CCA" class="headerlink" title="Local Discriminative CCA"></a>Local Discriminative CCA</h3><h2 id="Sparse-CCA"><a href="#Sparse-CCA" class="headerlink" title="Sparse CCA"></a>Sparse CCA</h2><h3 id="Element-level-Sparse-CCA"><a href="#Element-level-Sparse-CCA" class="headerlink" title="Element-level Sparse CCA"></a>Element-level Sparse CCA</h3><h3 id="Group-level-Sparse-CCA"><a href="#Group-level-Sparse-CCA" class="headerlink" title="Group-level Sparse CCA"></a>Group-level Sparse CCA</h3><h2 id="Locality-Preserving-CCA"><a href="#Locality-Preserving-CCA" class="headerlink" title="Locality Preserving CCA"></a>Locality Preserving CCA</h2><h2 id="Future-Direction-Suggestions"><a href="#Future-Direction-Suggestions" class="headerlink" title="Future Direction Suggestions"></a>Future Direction Suggestions</h2><p>最后就用文章中的总结表格结束这篇微博吧~</p>
+<p><img src="/img/CCA/2.png" srcset="/img/loading.gif" alt=""></p>
 
             </article>
             <hr>
