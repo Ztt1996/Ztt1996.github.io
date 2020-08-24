@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>Dual Blind Denoising AE - Hexo</title>
+  <title>Factor analysis - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -152,8 +152,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-17 09:40">
-      2020年8月17日 上午
+    <time datetime="2020-08-22 14:26">
+      2020年8月22日 下午
     </time>
   </div>
 
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      153 字
+      1.1k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      15
        分钟
     </span>
   
@@ -204,12 +204,54 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="Dual-Blind-Denoising-Autoencoders-for-Industrial-Process-Data-Filtering"><a href="#Dual-Blind-Denoising-Autoencoders-for-Industrial-Process-Data-Filtering" class="headerlink" title="Dual Blind Denoising Autoencoders for Industrial Process Data Filtering"></a>Dual Blind Denoising Autoencoders for Industrial Process Data Filtering</h2><p>文章出处：</p>
-<p>Saúl Langarica and Felipe Núñez, “Dual Blind Denoising Autoencoders for Industrial Process Data Filtering,” arXiv:2004.06806, 2020</p>
-<p>下载地址：</p>
-<p><a href="https://www.researchgate.net/publication/340662714_Dual_Blind_Denoising_Autoencoders_for_Industrial_Process_Data_Filtering" target="_blank" rel="noopener">https://www.researchgate.net/publication/340662714_Dual_Blind_Denoising_Autoencoders_for_Industrial_Process_Data_Filtering</a></p>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>在工业过程建模分析中，准确、高质量的过程数据是数据驱动方法所必须的。但是在实际生产中，所采集的数据中往往包含大量的噪声和异常值。因此针对这个问题，本文提出了一种数据驱动的学习方法，在Autoencoder框架中结合卷积和递归神经网络，用于过程数据的清洗。</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2>
+              <p>Factor analysis </p>
+<p>因子分析方法</p>
+<h2 id="算法出处"><a href="#算法出处" class="headerlink" title="算法出处"></a>算法出处</h2><h2 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h2><p>假设$\left{ \mathbf{Y}_t \right} $ 为 $d$ 维的时间序列，为了探究其动态结构，我们可以假设$\mathbf{Y}_t $可以分解成如下的形式</p>
+<script type="math/tex; mode=display">
+\mathbf{Y}_t=\mathbf{AX}_t+\mathbf{\varepsilon }_{\boldsymbol{t}}</script><script type="math/tex; mode=display">
+Y_t=AX_t+\mathbf{\varepsilon }_{\boldsymbol{t}} _t</script><p>其中Dynamic part $X_t$  为$r$维的时间序列，称为因子。并且满足$r\leqslant d$ 。</p>
+<p>A为$d\times r$的因子负载矩阵，$rank(A)=r$, 并且满足正交性，即：$A^TA=I_r$</p>
+<p>Static part$\left{ \varepsilon <em>t \right}$ 为白噪声序列，均值为$\mu </em>{\varepsilon}$，协方差为$\mathbf{\Sigma }_{\varepsilon}$, 满足在任意时间点上不相关。</p>
+<p>这个算法往往有三个假设：</p>
+<ol>
+<li><p>不存在线性组合使得组合后的$\mathbf{X}_t$白噪声。</p>
+</li>
+<li><p>A的秩为r，这样保证$\mathbf{X}_t$是$\left{ \mathbf{Y}_t \right} $ 最低维度的表征；；</p>
+</li>
+<li>A的每列向量之间相互正交；（为什么是每列？）</li>
+</ol>
+<p><strong>注意：</strong>上面的约束并不能保证A是独一无二的，因为用$\mathbf{AH},\mathbf{H}^T\mathbf{X}_t$来代替的也是完全成立的，但是由A所决定的空间是唯一的，即对于任意可逆的矩阵$H$ ,  满足：$M\left( \mathbf{A} \right) =M\left( H\mathbf{A} \right) $</p>
+<p>在实际过程中只有$ \left{ Y_t \right}$ 是可观测到的，可以是我们在过程运行中所采集到的数据。动态因子分析方法就是希望能找到降维后的$\mathbf{X}_t$ 和负载矩阵$\mathbf{A}$。</p>
+<p>一旦我们找到了负载矩阵$\mathbf{A}$ ，我们就可以估计出过程的factor和残差：</p>
+<script type="math/tex; mode=display">
+\mathbf{\hat{X}}_t=\mathbf{A}^T\mathbf{Y}_t
+\\
+\mathbf{\varepsilon }_{\boldsymbol{t}}=\left( \mathbf{I}-\mathbf{AA}^T \right) \mathbf{Y}_t</script><p>此时factor $\mathbf{\hat{X}}_t$ 可以用来指示过程的动态变化。</p>
+<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><p>动态因子分析算法的目标是找到负载矩阵$\mathbf{A}$ ,也可以等价于找到它的正交余角（是这么翻译的吗？）$\mathbf{B}$ 维度为 $d<em>(d-r)$。A和B能组成一个d</em>d的正交矩阵，即举证的每一列都是正交的，所以有</p>
+<p>$\mathbf{B}^T\mathbf{A}=0$。</p>
+<p>$\mathbf{B}^T\mathbf{B}=\mathbf{I}_{d-r}$</p>
+<script type="math/tex; mode=display">
+\mathbf{B}^T\mathbf{Y}_t=\mathbf{B}^T\mathbf{\varepsilon }_{\boldsymbol{t}}</script><p>从这个公式可以看出$\mathbf{B}^T\mathbf{Y}_t$是一个白噪声过程，不存在时序相关性。由此，找到矩阵A也可以转换成寻找矩阵B，使得投影后得到不具有时序相关性的白噪声序列。</p>
+<p><strong>对于DFA，往往对于因子和噪声有如下假设：</strong></p>
+<p>C.1 $\mathbf{X}<em>t$ 和$\mathbf{\varepsilon }</em>{\boldsymbol{t}}$ 在任意时刻都不相关；（大部分FA分析都是如此假设的）；</p>
+<p>C.2 当因子和观测数据都是平稳，上述的假设可以替换为：$\begin{equation}\operatorname{cov}\left(\mathbf{x}<em>{t}, \boldsymbol{\varepsilon}</em>{t+k}\right)=0 \text { for any } k \geq 0\end{equation}$  (假设2看起来没有假设1那么严格)</p>
+<p>定义如下几个矩阵：</p>
+<script type="math/tex; mode=display">
+\mathbf{\Sigma }_y\left( k \right) =\text{Cov}\left( \mathbf{y}_{t+k},\mathbf{y}_t \right) 
+\\
+\mathbf{\Sigma }_x\left( k \right) =\text{Cov}\left( \mathbf{x}_{t+k},\mathbf{x}_t \right) 
+\\
+\mathbf{\Sigma }_{x\varepsilon}\left( k \right) =\text{Cov}\left( \mathbf{x}_{t+k},\boldsymbol{\varepsilon }_t \right)</script><p>根据假设C.2，可以推理得到</p>
+<p>$\mathbf{\Sigma }<em>y\left( k \right) =\mathbf{A\Sigma }_x\left( k \right) \mathbf{A}^T+\mathbf{A\Sigma }</em>{x\varepsilon}\left( k \right) $</p>
+<p>根据假设C.1可以得到：</p>
+<p>$\mathbf{\Sigma }_y\left( k \right) =\mathbf{A\Sigma }_x\left( k \right) \mathbf{A}^T$</p>
+<p>给定整数$k_0$ , 定义</p>
+<script type="math/tex; mode=display">
+\mathbf{M}=\sum_{k=1}^{k_0}{\mathbf{\Sigma }_y\left( k \right) \mathbf{\Sigma }_y\left( k \right) ^T}</script><p>$M$ 是一个非负矩阵，并且满足$\mathbf{MB}=0$。因此矩阵B的每一列对应的是矩阵M的0特征值所对应的特征向量，而相应矩阵A的每一列对应的是矩阵M的非零特征值所对应的特征向量。</p>
+<p>$\mathbf{M}$集合了不同时延下的信息。这里利用的是$\mathbf{\Sigma }_y\left( k \right) \mathbf{\Sigma }_y\left( k \right) ^T$  而不是直接利用协方差矩阵，这是为了避免直接利用协方差矩阵进行相加出现的抵消。同时也是利用了如下的定理：,</p>
+<p>对于任意矩阵$\mathbf{C}$ , $\mathbf{MC}=0$ 当且仅当对于所有的$1&lt;=k&lt;=k_0$ 都满足：$\mathbf{\Sigma }_y\left( k \right) ^T\mathbf{C}=0$ 。</p>
+<p>（在实际使用时，往往趋向于较小的时延$k$, 因为实际中观测序列往往在时延较小时呈现出较强的自相关性）</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
             </article>
             <hr>
             <div>
@@ -218,7 +260,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%AB%A0/">文章</a>
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
                     
                   </div>
                 
@@ -226,7 +268,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/AE/">AE</a>
+                      <a class="hover-with-bg" href="/tags/%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95/">降维算法</a>
                     
                   </div>
                 
@@ -239,18 +281,12 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/22/analysis/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Factor analysis</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/08/04/CCA/">
-                        <span class="hidden-mobile">Deep CCA</span>
+                      <a href="/2020/08/17/DAE/">
+                        <span class="hidden-mobile">Dual Blind Denoising AE</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -389,7 +425,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Dual Blind Denoising AE&nbsp;",
+        "Factor analysis&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
