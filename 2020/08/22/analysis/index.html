@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.4k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15
+      18
        分钟
     </span>
   
@@ -206,12 +206,13 @@
             <article class="markdown-body">
               <p>Factor analysis </p>
 <p>因子分析方法</p>
-<h2 id="算法出处"><a href="#算法出处" class="headerlink" title="算法出处"></a>算法出处</h2><h2 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h2><p>假设$\left{ \mathbf{Y}_t \right} $ 为 $d$ 维的时间序列，为了探究其动态结构，我们可以假设$\mathbf{Y}_t $可以分解成如下的形式</p>
+<h2 id="算法出处"><a href="#算法出处" class="headerlink" title="算法出处"></a>算法出处</h2><p>因子分析方法是在经济学中常用的时间序列降维算法。其目的在于从高维的时间序列中分离出能表示序列中动态信息的因子和不具有时序相关性的白噪声。</p>
+<h2 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h2><p>为了探究时间序列的动态结构，我们可以假设d维的时间序列$\mathbf{Y}_t $可以分解成如下的形式</p>
 <script type="math/tex; mode=display">
-\mathbf{Y}_t=\mathbf{AX}_t+\mathbf{\varepsilon }_{\boldsymbol{t}}</script><script type="math/tex; mode=display">
-Y_t=AX_t+\mathbf{\varepsilon }_{\boldsymbol{t}} _t</script><p>其中Dynamic part $X_t$  为$r$维的时间序列，称为因子。并且满足$r\leqslant d$ 。</p>
+\mathbf{Y}_t=\mathbf{AX}_t+\mathbf{\varepsilon }_{\boldsymbol{t}}</script><p>其中Dynamic part $X_t$  为$r$维的时间序列，称为因子。并且满足$r\leqslant d$ 。</p>
 <p>A为$d\times r$的因子负载矩阵，$rank(A)=r$, 并且满足正交性，即：$A^TA=I_r$</p>
-<p>Static part$\left{ \varepsilon <em>t \right}$ 为白噪声序列，均值为$\mu </em>{\varepsilon}$，协方差为$\mathbf{\Sigma }_{\varepsilon}$, 满足在任意时间点上不相关。</p>
+<p>Static part  $\left{ \varepsilon _t \right}$ 为白噪声序列，</p>
+<p>均值为$\mu <em>{\varepsilon}$，协方差为$\mathbf{\Sigma }</em>{\varepsilon}$, 满足在任意时间点上不相关。</p>
 <p>这个算法往往有三个假设：</p>
 <ol>
 <li><p>不存在线性组合使得组合后的$\mathbf{X}_t$白噪声。</p>
@@ -228,9 +229,9 @@ Y_t=AX_t+\mathbf{\varepsilon }_{\boldsymbol{t}} _t</script><p>其中Dynamic part
 \\
 \mathbf{\varepsilon }_{\boldsymbol{t}}=\left( \mathbf{I}-\mathbf{AA}^T \right) \mathbf{Y}_t</script><p>此时factor $\mathbf{\hat{X}}_t$ 可以用来指示过程的动态变化。</p>
 <h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><p>动态因子分析算法的目标是找到负载矩阵$\mathbf{A}$ ,也可以等价于找到它的正交余角（是这么翻译的吗？）$\mathbf{B}$ 维度为 $d<em>(d-r)$。A和B能组成一个d</em>d的正交矩阵，即举证的每一列都是正交的，所以有</p>
-<p>$\mathbf{B}^T\mathbf{A}=0$。</p>
-<p>$\mathbf{B}^T\mathbf{B}=\mathbf{I}_{d-r}$</p>
 <script type="math/tex; mode=display">
+\mathbf{B}^T\mathbf{A}=0</script><script type="math/tex; mode=display">
+\mathbf{B}^T\mathbf{B}=\mathbf{I}_{d-r}</script><script type="math/tex; mode=display">
 \mathbf{B}^T\mathbf{Y}_t=\mathbf{B}^T\mathbf{\varepsilon }_{\boldsymbol{t}}</script><p>从这个公式可以看出$\mathbf{B}^T\mathbf{Y}_t$是一个白噪声过程，不存在时序相关性。由此，找到矩阵A也可以转换成寻找矩阵B，使得投影后得到不具有时序相关性的白噪声序列。</p>
 <p><strong>对于DFA，往往对于因子和噪声有如下假设：</strong></p>
 <p>C.1 $\mathbf{X}<em>t$ 和$\mathbf{\varepsilon }</em>{\boldsymbol{t}}$ 在任意时刻都不相关；（大部分FA分析都是如此假设的）；</p>
@@ -242,15 +243,22 @@ Y_t=AX_t+\mathbf{\varepsilon }_{\boldsymbol{t}} _t</script><p>其中Dynamic part
 \mathbf{\Sigma }_x\left( k \right) =\text{Cov}\left( \mathbf{x}_{t+k},\mathbf{x}_t \right) 
 \\
 \mathbf{\Sigma }_{x\varepsilon}\left( k \right) =\text{Cov}\left( \mathbf{x}_{t+k},\boldsymbol{\varepsilon }_t \right)</script><p>根据假设C.2，可以推理得到</p>
-<p>$\mathbf{\Sigma }<em>y\left( k \right) =\mathbf{A\Sigma }_x\left( k \right) \mathbf{A}^T+\mathbf{A\Sigma }</em>{x\varepsilon}\left( k \right) $</p>
-<p>根据假设C.1可以得到：</p>
-<p>$\mathbf{\Sigma }_y\left( k \right) =\mathbf{A\Sigma }_x\left( k \right) \mathbf{A}^T$</p>
+<script type="math/tex; mode=display">
+\mathbf{\Sigma }_y\left( k \right) =\mathbf{A\Sigma }_x\left( k \right) \mathbf{A}^T+\mathbf{A\Sigma }_{x\varepsilon}\left( k \right)</script><p>根据假设C.1可以得到：</p>
+<script type="math/tex; mode=display">
+\mathbf{\Sigma }_y\left( k \right) =\mathbf{A\Sigma }_x\left( k \right) \mathbf{A}^T</script><script type="math/tex; mode=display">
+\mathbf{\Sigma }_y\left( k \right) ^T\mathbf{B}=0</script><p>根据假设C.1，DFA的目标函数也可以相应描述为最下话以下的公式：</p>
+<script type="math/tex; mode=display">
+\Psi _n\left( \mathbf{B} \right) \equiv \sum_{k=1}^{k_0}{\lVert \mathbf{B}^{\text{T}}\mathbf{\Sigma }_y\left( k \right) \mathbf{B} \rVert ^2}=\sum_{k=1}^p{\sum_{1\leqslant i,j\leqslant d-r}{corr}}\left( b_{i}^{T}\mathbf{y}_t,b_{j}^{T}\mathbf{y}_{t-k} \right) ^2</script><p>带大家理解一下上述目标的含义，DFA最小化转换后向量的时序相关性。</p>
 <p>给定整数$k_0$ , 定义</p>
 <script type="math/tex; mode=display">
 \mathbf{M}=\sum_{k=1}^{k_0}{\mathbf{\Sigma }_y\left( k \right) \mathbf{\Sigma }_y\left( k \right) ^T}</script><p>$M$ 是一个非负矩阵，并且满足$\mathbf{MB}=0$。因此矩阵B的每一列对应的是矩阵M的0特征值所对应的特征向量，而相应矩阵A的每一列对应的是矩阵M的非零特征值所对应的特征向量。</p>
-<p>$\mathbf{M}$集合了不同时延下的信息。这里利用的是$\mathbf{\Sigma }_y\left( k \right) \mathbf{\Sigma }_y\left( k \right) ^T$  而不是直接利用协方差矩阵，这是为了避免直接利用协方差矩阵进行相加出现的抵消。同时也是利用了如下的定理：,</p>
+<p>$\mathbf{M}$是一个非负定的矩阵，集合了不同时延下的信息。这里利用的是$\mathbf{\Sigma }_y\left( k \right) \mathbf{\Sigma }_y\left( k \right) ^T$  而不是直接利用协方差矩阵，这是为了避免直接利用协方差矩阵进行相加出现的抵消。这样进行特征值分解也是基于了如下定理：</p>
 <p>对于任意矩阵$\mathbf{C}$ , $\mathbf{MC}=0$ 当且仅当对于所有的$1&lt;=k&lt;=k_0$ 都满足：$\mathbf{\Sigma }_y\left( k \right) ^T\mathbf{C}=0$ 。</p>
 <p>（在实际使用时，往往趋向于较小的时延$k$, 因为实际中观测序列往往在时延较小时呈现出较强的自相关性）</p>
+<p><strong>注意：</strong>由于实际的观测中往往包含随机噪声，所以$\mathbf{M}$ 并不一定存在“真的等于0”的特征根，但是存在非常小接近于零的特征，此时如何确定r呢？</p>
+<p>这里有学者提出用一种基于比例的方式，假设$\hat{\lambda}_1\geqslant \hat{\lambda}_2\geqslant \cdots \geqslant \hat{\lambda}_d$ 是得到的从大到小排列的特征值，因此可以选择使得如下目标函数最小的$r$</p>
+<p><img src="/img/FA/1.png" srcset="/img/loading.gif" alt=""></p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
             </article>
             <hr>
