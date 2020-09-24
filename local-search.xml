@@ -54,31 +54,6 @@
   
   
   <entry>
-    <title>Dual Blind Denoising AE</title>
-    <link href="/2020/08/17/DAE/"/>
-    <url>/2020/08/17/DAE/</url>
-    
-    <content type="html"><![CDATA[<h2 id="Dual-Blind-Denoising-Autoencoders-for-Industrial-Process-Data-Filtering"><a href="#Dual-Blind-Denoising-Autoencoders-for-Industrial-Process-Data-Filtering" class="headerlink" title="Dual Blind Denoising Autoencoders for Industrial Process Data Filtering"></a>Dual Blind Denoising Autoencoders for Industrial Process Data Filtering</h2><p>文章出处：</p><p>Saúl Langarica and Felipe Núñez, “Dual Blind Denoising Autoencoders for Industrial Process Data Filtering,” arXiv:2004.06806, 2020</p><p>下载地址：</p><p><a href="https://www.researchgate.net/publication/340662714_Dual_Blind_Denoising_Autoencoders_for_Industrial_Process_Data_Filtering" target="_blank" rel="noopener">https://www.researchgate.net/publication/340662714_Dual_Blind_Denoising_Autoencoders_for_Industrial_Process_Data_Filtering</a></p><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>在工业过程建模分析中，准确、高质量的过程数据是数据驱动方法所必须的。但是在实际生产中，所采集的数据中往往包含大量的噪声和异常值。因此针对这个问题，本文提出了一种数据驱动的学习方法，在Autoencoder框架中结合卷积和递归神经网络，用于过程数据的清洗。</p><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2>]]></content>
-    
-    
-    <categories>
-      
-      <category>文章</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>AE</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Deep CCA</title>
     <link href="/2020/08/04/CCA/"/>
     <url>/2020/08/04/CCA/</url>
