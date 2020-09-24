@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      346 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      4
        分钟
     </span>
   
@@ -204,7 +204,19 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              
+              <h1 id="Support-Vector-Machine-SVM"><a href="#Support-Vector-Machine-SVM" class="headerlink" title="Support Vector Machine (SVM)"></a>Support Vector Machine (SVM)</h1><h1 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h1><p>SVM于1995年正式发表，是机器学习中的重要方法，广泛用于分类和回归问题，特别适用于中小型、非线性、高维的样本。虽然现在很多集成学习方法的各方面性能都优于SVM，但是其不枉为一种非常经典的机器学习方法。本文旨在介绍SVM的主要思想与推导过程。</p>
+<p>在介绍SVM之前，我先带大家回顾一下有关点到超平面距离的相关知识基础。</p>
+<p><img src="/img/SVM/i.png" srcset="/img/loading.gif" alt=""> </p>
+<p>如上图所示，如何求点$\mathbf{x}$到超平面$\mathbf{w}^T\mathbf{x}+\mathbf{b}=0$ 的距离$\mathbf{b}$?</p>
+<p>设$\mathbf{x}_0$ 和$\mathbf{x}_1$ 是超平面上的两个点，则：</p>
+<script type="math/tex; mode=display">
+\left\{ \begin{array}{c}
+    \mathbf{w}^T\mathbf{x}_0+\mathbf{b}=0\\
+    \mathbf{w}^T\mathbf{x}_1+\mathbf{b}=0\\
+\end{array} \right. \Rightarrow \mathbf{w}^T\left( \mathbf{x}_0-\mathbf{x}_1 \right) =0</script><p>即，向量$\mathbf{w}$是垂直于超平面的。</p>
+<p>我们可以通过计算$\mathbf{x}$ 和$\mathbf{x}_0$ 之间的距离来得到点到超平面的距离，因此有：</p>
+<script type="math/tex; mode=display">
+d=\left\| \boldsymbol{x}-\boldsymbol{x}_0 \right\| \cos \theta =\left\| \boldsymbol{x}-\boldsymbol{x}_0 \right\| \frac{\left| \boldsymbol{w}^{\top}\left( \boldsymbol{x}-\boldsymbol{x}_0 \right) \right|}{\left\| \boldsymbol{w} \right\| \cdot \left\| \boldsymbol{x}-\boldsymbol{x}_0 \right\|}=\frac{\left| \boldsymbol{w}^{\top}\boldsymbol{x}-\boldsymbol{w}^{\top}\boldsymbol{x}_0 \right|}{\left\| \boldsymbol{w} \right\|}=\frac{\left| \boldsymbol{w}^{\top}\boldsymbol{x}+b \right|}{\left\| \boldsymbol{w} \right\|}</script>
             </article>
             <hr>
             <div>
