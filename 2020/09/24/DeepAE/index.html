@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      970 字
+      1.1k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      15
        分钟
     </span>
   
@@ -224,14 +224,22 @@
 <p><strong>Step 1</strong>： 考虑一个长度为b的时间窗，以$b/2$的步长延时间轴对原始时间序列进行滑动，因此可以得到$\frac{2C-b}{b}$ 个如下的窗口</p>
 <script type="math/tex; mode=display">
 wd_i=\left\{ S_i,S_{i+1},,S_{i+b-1} \right\}</script><p>对应时间间隔$\left[ t<em>i,t</em>{i+b-1} \right]$。</p>
-<p>针对每个窗口，构造两种特征：Norm (NOR) and Difference of norm (DON)*</p>
+<p>针对每个窗口中的每个变量$j$构造两种特征：Norm (NOR) and Difference of norm (DON)*</p>
 <script type="math/tex; mode=display">
 N O R^{j}\left(w d_{i}\right)=\left\|w d_{i}^{j}\right\|_{2}=\sqrt{\left(s_{i}^{j}\right)^{2}+\left(s_{i+1}^{j}\right)^{2}+\ldots+\left(s_{i+b-1}^{j}\right)^{2}}</script><script type="math/tex; mode=display">
-D O N^{j}\left(w d_{i}\right)=\operatorname{norm}^{j}\left(w d_{i}\right)-\operatorname{norm}^{j}\left(w d_{i-1}\right)</script><p>其中j对应的是特征维度。</p>
-<p>原本中提到NOR特征描述的是一定时间窗内样本值的变化，而DON特征描述的则是舒徐关系的变化。</p>
+D O N^{j}\left(w d_{i}\right)=\operatorname{norm}^{j}\left(w d_{i}\right)-\operatorname{norm}^{j}\left(w d_{i-1}\right)</script><p>原本中提到NOR特征描述的是一定时间窗内样本值的变化，而DON特征描述的则是舒徐关系的变化。</p>
 <p>窗口长度b的选取会影响对数据时序关系的挖掘，比如选择b=1时，探究的是相邻采样间的数据间的时序关系（可以近似看作一阶的时序关系），当选择较大的窗口长度时，原文认为可以一定程度上包含多个时间点上的变化。</p>
-<p>文中给出了第一步滑窗的示意图，帮助大家理解这个过程：</p>
-<p><img src="/img/DeepAE/2.png" srcset="/img/loading.gif" alt=""></p>
+<p>特征增强得到的新的特征为：</p>
+<script type="math/tex; mode=display">
+T=\left[ G_1,G_2,\cdots ,G_l \right]</script><p>其中$G_i$ 的维度为$d*k$, $d=2$ 以及 $l=\frac{2C-b}{b}$ 。</p>
+<p>Step 2: 考虑一个新长度为$f$步长为$f/2$ 的滑动窗口。针对特征增强得到的新特征，进一步进行统计特性的增强。因此同样可以得到 $h=\frac{2l-f}{f}$ 个窗口：</p>
+<script type="math/tex; mode=display">
+wf_i=\left\{ G_i,G_{i+1},,G_{i+f-1} \right\}</script><p>针对每个窗口增加了8个统计特征，即：mean (MEA), minimum (MIN), maximum(MAX), 25%-quartiles (25Q), 50%-quartile (50Q), 75%-quartile (75Q), standard deviation (STD), and peak to peak (P2P).</p>
+<p>得到的新的特征序列为：</p>
+<script type="math/tex; mode=display">
+H=\left[ F_1,F_2,\cdots ,F_h \right]</script><p>其中$F_i$ 的维度为$8d*k$, $d=2$。</p>
+<p>原文中给出了特征增强的示意图，帮大家理解这个过程：</p>
+<p><img src="/img/DeepAE/3.png" srcset="/img/loading.gif" alt=""></p>
 <h3 id="Deep-Neural-Network-based-Autoencoders"><a href="#Deep-Neural-Network-based-Autoencoders" class="headerlink" title="Deep Neural Network based Autoencoders"></a>Deep Neural Network based Autoencoders</h3><p>DCNN-AE</p>
 <p>LSTM-AE</p>
 <h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2>
