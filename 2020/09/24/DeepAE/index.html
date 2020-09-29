@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.4k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15
+      18
        分钟
     </span>
   
@@ -240,8 +240,16 @@ wf_i=\left\{ G_i,G_{i+1},,G_{i+f-1} \right\}</script><p>针对每个窗口增加
 H=\left[ F_1,F_2,\cdots ,F_h \right]</script><p>其中$F_i$ 的维度为$8d*k$, $d=2$。</p>
 <p>原文中给出了特征增强的示意图，帮大家理解这个过程：</p>
 <p><img src="/img/DeepAE/3.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="Deep-Neural-Network-based-Autoencoders"><a href="#Deep-Neural-Network-based-Autoencoders" class="headerlink" title="Deep Neural Network based Autoencoders"></a>Deep Neural Network based Autoencoders</h3><p>DCNN-AE</p>
-<p>LSTM-AE</p>
+<h3 id="Deep-Neural-Network-based-Autoencoders"><a href="#Deep-Neural-Network-based-Autoencoders" class="headerlink" title="Deep Neural Network based Autoencoders"></a>Deep Neural Network based Autoencoders</h3><p><strong>DCNN-AE</strong></p>
+<p>DCNN-AE仍然使用的是DCNN的框架，将H作为网络的输入，其中每一个矩阵$F_i$ 就作为一个样本，其标签就为它自身，因此DCNN-AE同AE以重构为目的进行特征的学习。</p>
+<p>在编码层，针对每个$F_i$进行卷积操作（选取$2*2$的卷积核，取最大值）：</p>
+<script type="math/tex; mode=display">
+\mathbf{J}_{i}^{k}=\sigma\left(\mathbf{F}_{i} * \mathbf{W}^{k}+B^{k}\right)</script><p>同样在解码层，进行如下的up-sampling操作：</p>
+<script type="math/tex; mode=display">
+\hat{\mathbf{F}}_{i}=\sigma\left(\sum_{k=1}^{|F I|} \mathbf{J}_{i}^{k} * \tilde{\mathbf{W}}^{k}+B^{k}\right)</script><p>网络结构图如下：</p>
+<p><img src="/img/DeepAE/4.png" srcset="/img/loading.gif" alt=""></p>
+<p>DCNN-AE在建模的过程中，输入矩阵$F_i$是单独考虑的，即认为它们相互间是独立的。但是由于时序关系的存在$F_i$和$F_j$是存在相互关系的，DCNN-AE并不能分析这种关系，因此作者紧接着提出了LSTM-AE。</p>
+<p><strong>LSTM-AE</strong></p>
 <h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2>
             </article>
             <hr>
