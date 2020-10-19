@@ -265,7 +265,7 @@ F=\left[ H_1,F_2,\cdots ,H_h \right]</script><p>首先，考虑到$F_i$是一个
 <p>Encoder：结合LSTM的性质， 在任意时刻$j$($i-4&lt;j&lt;i$)的隐含状态$J_{j}^{en}$ 同时受到当前时刻的输入和过去时刻隐含状态的影响。注意，最终只有$i$时刻的隐含状态传递给了decoder部分。所以，满足：</p>
 <script type="math/tex; mode=display">
 J_{j}^{en}=J_{j}^{de}</script><p>Decoder: 与encoder的过程相反，decoder从$i$时刻逐一向$i-4$时刻遍历。所以当前时刻的隐含状态会受到当前时刻和下一个时刻隐含状态的影响。</p>
-<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Codes"><a href="#Codes" class="headerlink" title="Codes"></a>Codes</h2><p>知乎上有位博主提供了这篇文章中LSTM-AE的代码实现，这里给大家提供一个链接，有想尝试的朋友可以参考：</p>
+<h2 id="Codes"><a href="#Codes" class="headerlink" title="Codes"></a>Codes</h2><p>知乎上有位博主提供了这篇文章中LSTM-AE的代码实现，这里给大家提供一个链接，有想尝试的朋友可以参考：</p>
 <p><a href="https://zhuanlan.zhihu.com/p/237292509" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/237292509</a></p>
 
             </article>
