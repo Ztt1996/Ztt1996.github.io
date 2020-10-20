@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>A Survey on GANs for Anomaly Detection</title>
+    <link href="/2020/10/20/GAN/"/>
+    <url>/2020/10/20/GAN/</url>
+    
+    <content type="html"><![CDATA[<h1 id="A-Survey-on-GANs-for-Anomaly-Detection"><a href="#A-Survey-on-GANs-for-Anomaly-Detection" class="headerlink" title="A Survey on GANs for Anomaly Detection"></a>A Survey on GANs for Anomaly Detection</h1><h2 id="文章下载地址："><a href="#文章下载地址：" class="headerlink" title="文章下载地址："></a>文章下载地址：</h2><p><a href="https://arxiv.org/pdf/1906.11632v1.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1906.11632v1.pdf</a></p><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>文章</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>GAN</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>TAnoGAN</title>
+    <link href="/2020/10/19/TAnoGAN/"/>
+    <url>/2020/10/19/TAnoGAN/</url>
+    
+    <content type="html"><![CDATA[<h1 id="TAnoGAN-Time-Series-Anomaly-Detection-with-Generative-Adversarial-Networks"><a href="#TAnoGAN-Time-Series-Anomaly-Detection-with-Generative-Adversarial-Networks" class="headerlink" title="TAnoGAN: Time Series Anomaly Detection with Generative Adversarial Networks"></a>TAnoGAN: Time Series Anomaly Detection with Generative Adversarial Networks</h1><h2 id="文章下载地址："><a href="#文章下载地址：" class="headerlink" title="文章下载地址："></a>文章下载地址：</h2><p><a href="https://arxiv.org/pdf/2008.09567.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/2008.09567.pdf</a></p><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>在实际生产过程中，例如制造业，医学图像处理，信息安全等领域，对于时间序列的异常检测具有重要的意义。近年来，利用生成对抗网络 (GAN) 进行生成和异常检测在图像处理领域受到了广泛的关注。时间序列的异常检测往往可以看作是一个无监督学习任务。现有的大部分无监督学习异常检测方法，无法处理时间序列间的非线性关系，因此本文提出了一种基于GAN的监督学习方法，用于处理小样本情况下的时间序列异常检测。</p><h2 id="Contributions"><a href="#Contributions" class="headerlink" title="Contributions"></a>Contributions</h2><p>本文作者总结了如下贡献点：</p><ol><li>We propose a GAN-based method called TAnoGan to detect anomalies in time series datasets when a small number of data points are available. In general, neural network-based models require setting a large number of parameters. Therefore, these models need to be trained on huge number of data points.</li><li>We evaluate TAnoGan on an extensive and diverse range of 46 time series datasets from the NAB collection that cover avariety of domains. </li><li>We show that LSTM-based GAN improves over LSTM by utilising adversarial training in time<br>series data. </li><li>We show that TAnoGan performs better than traditional and neural network models.</li></ol><h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><p><strong>前情提要：</strong></p><ol><li>无监督学习方法的异常检测模式</li></ol><p>主要考察样本沿时间是否服从一个正常的分布，将不服从分布的样本点视为异常点；</p><ol><li>基于GAN的异常检测的方法的基本模式</li></ol><p>Detecting anomalies in time series using GAN requires modelling the normal behaviour of time<br>series data using the adversarial training process and then detecting anomalies using an anomaly score that indicates how much the data points have deviated from the normal behaviour [3], [12], [2].</p><p>For learning the anomaly score, we first map the real time series data space to a latent space and then reconstruct the data from latent space. The anomaly score is estimated as the loss between the real data and reconstructed (fake) data.</p><h2 id="Codes"><a href="#Codes" class="headerlink" title="Codes"></a>Codes</h2><p>这篇文章相关的代码可以在下面的网址下载，有想尝试的盆友可以参考：</p><p><a href="https://paperswithcode.com/paper/tanogan-time-series-anomaly-detection-with#code" target="_blank" rel="noopener">https://paperswithcode.com/paper/tanogan-time-series-anomaly-detection-with#code</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>文章</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>GAN</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>RNN</title>
     <link href="/2020/10/12/RNN/"/>
     <url>/2020/10/12/RNN/</url>
@@ -21,6 +71,31 @@
     <tags>
       
       <tag>nerual network</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Deep Neural Networks based AE for outlier detection</title>
+    <link href="/2020/09/24/DeepAE/"/>
+    <url>/2020/09/24/DeepAE/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Outlier-Detection-for-Multidimensional-Time-Series-using-Deep-Neural-Networks"><a href="#Outlier-Detection-for-Multidimensional-Time-Series-using-Deep-Neural-Networks" class="headerlink" title="Outlier Detection for Multidimensional Time Series using Deep Neural Networks"></a>Outlier Detection for Multidimensional Time Series using Deep Neural Networks</h1><h2 id="文章下载地址："><a href="#文章下载地址：" class="headerlink" title="文章下载地址："></a>文章下载地址：</h2><p><a href="https://ieeexplore.ieee.org/document/8411269" target="_blank" rel="noopener">https://ieeexplore.ieee.org/document/8411269</a></p><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>随着工业过程和日常生活的数字化程度日益增加，往往会收集到大量的具有时序结构的时间序列数据，例如GPS记录下的汽车行驶的速度和方向。为了更好地分析这些时间序列数据，进行异常检测，本文首先提出了基于卷积神经网络（Convolutional nerual networks, CNN）和长短期记忆模型（Long-short term memory, LSTM）模型的自编码器（Autoencoder，AE）框架。首先，提出了一种方法用于生成具有统计性质的特征来丰富原始时间序列的特征空间，然后利用自编码器对扩充后时序特征进行降维。通过比较AE重构的时间序列和扩充后的时序特征，则可以检测时间序列是否出现异常值。</p><h2 id="Contributions"><a href="#Contributions" class="headerlink" title="Contributions"></a>Contributions</h2><p>本文作者总结了三个贡献点：</p><ol><li><p>文章从对不同的角度对时间序列进行了特征增强从而能更全面地捕捉时间序列在时间上的变化；</p></li><li><p>基于AE的思想，利用重构误差来实现异常点的识别；</p></li><li><p>第三个贡献点相关的内容本篇博客就没有介绍啦：</p><p>文章利用嵌入方法克服one-hot的缺点，将数据相关的文本信息（比如：天气，道路等）进行编译后，也将其作为网络的输入来提高异常点检测的准确率。</p></li></ol><h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><p>对于多元时间序列：$T=\left[ S_1,S_2,\cdots ,S_C \right] \in \mathbb{R}^{k\times C}<br>$ ， 包含$k$个变量和$C$个采样点。</p><p>其中  $S<em>i=\left[ s</em>{i1},s<em>{i2},\cdots ,s</em>{ik} \right] ^T$</p><p>本文提出的基于时间序列统计特性增强的AE网络结构，如图所示：</p><p><img src="/img/DeepAE/1.png" srcset="/img/loading.gif" alt=""></p><p>其中Raw time series 对应的是原始时间序列，Enriched Time Series 对应的是对统计特性进行增强的时间序列。</p><p>另外，本文还提出了两种新的AE框架，即：基于 2D convolutional neural network的AE和基于long short term memory 的AE框架。</p><p>首先带大家回顾一下AE的主要思想。AE是一种基于重构的无监督学习方法，它的目标是使得重构出来的数据与原始数据的误差尽可能地小。</p><p>个人感觉它可以看出是PCA，CCA这些隐变量模型的非线性版本。AE包括两个步骤：</p><p>Encoder：将高维输入映射成低维的隐含状态</p><script type="math/tex; mode=display">hidden=\sigma_{1}\left(\mathbf{W}_{1} X+B_{1}\right)</script><p>Decoder：利用低维的隐含状态去重构原始数据</p><script type="math/tex; mode=display">\hat{X}=\sigma_{2}\left(\mathbf{W}_{2} F+B_{2}\right)</script><p><strong>本文的核心思想是：</strong>相比于正常数据（representative），异常点更难被低维的特征空间所表征（non-representative），因此当遇到异常点时，AE的重构误差会变得很大，因此可以利用重构误差进行判断数据中是否出现outliers。</p><p>下面将对本文的三个要点进行一一介绍。</p><h3 id="Enriching-Raw-Time-Series"><a href="#Enriching-Raw-Time-Series" class="headerlink" title="Enriching Raw Time Series"></a>Enriching Raw Time Series</h3><p>考虑到时间序列是具有时序相关性的，因此本文提出了一种滑窗的方式来丰富时间序列的特征，主要分成以下两个步骤。</p><p><strong>Step 1</strong>： 考虑一个长度为b的时间窗，以$b/2$的步长延时间轴对原始时间序列进行滑动，因此可以得到$\frac{2C-b}{b}$ 个如下的窗口</p><script type="math/tex; mode=display">wd_i=\left\{ S_i,S_{i+1},,S_{i+b-1} \right\}</script><p>对应时间间隔 $\left[ i,{i+b-1} \right]$。</p><p>针对每个窗口中的每个变量$j$构造两种特征：Norm (NOR) and Difference of norm (DON)*</p><script type="math/tex; mode=display">N O R^{j}\left(w d_{i}\right)=\left\|w d_{i}^{j}\right\|_{2}=\sqrt{\left(s_{i}^{j}\right)^{2}+\left(s_{i+1}^{j}\right)^{2}+\ldots+\left(s_{i+b-1}^{j}\right)^{2}}</script><script type="math/tex; mode=display">D O N^{j}\left(w d_{i}\right)=\operatorname{norm}^{j}\left(w d_{i}\right)-\operatorname{norm}^{j}\left(w d_{i-1}\right)</script><p>原本中提到NOR特征描述的是一定时间窗内样本值的变化，而DON特征描述的则是舒徐关系的变化。</p><p>窗口长度b的选取会影响对数据时序关系的挖掘，比如选择b=1时，探究的是相邻采样间的数据间的时序关系（可以近似看作一阶的时序关系），当选择较大的窗口长度时，原文认为可以一定程度上包含多个时间点上的变化。</p><p>特征增强得到的新的特征为：</p><script type="math/tex; mode=display">T=\left[ G_1,G_2,\cdots ,G_l \right]</script><p>其中$G_i$ 的维度为$d*k$, $d=2$ 以及 $l=\frac{2C-b}{b}$ 。</p><p>Step 2: 考虑一个新长度为$f$步长为$f/2$ 的滑动窗口。针对特征增强得到的新特征，进一步进行统计特性的增强。因此同样可以得到 $h=\frac{2l-f}{f}$ 个窗口：</p><script type="math/tex; mode=display">wf_i=\left\{ G_i,G_{i+1},,G_{i+f-1} \right\}</script><p>针对每个窗口增加了8个统计特征，即：mean (MEA), minimum (MIN), maximum(MAX), 25%-quartiles (25Q), 50%-quartile (50Q), 75%-quartile (75Q), standard deviation (STD), and peak to peak (P2P).</p><p>得到的新的特征序列为：</p><script type="math/tex; mode=display">F=\left[ H_1,H_2,\cdots ,H_h \right]</script><p>其中$H_i$ 的维度为$8d*k$, $d=2$。</p><p>原文中给出了特征增强的示意图，帮大家理解这个过程：</p><p><img src="/img/DeepAE/3.png" srcset="/img/loading.gif" alt=""></p><h3 id="Deep-Neural-Network-based-Autoencoders"><a href="#Deep-Neural-Network-based-Autoencoders" class="headerlink" title="Deep Neural Network based Autoencoders"></a>Deep Neural Network based Autoencoders</h3><p><strong>DCNN-AE</strong></p><p>DCNN-AE仍然使用的是DCNN的框架，将H作为网络的输入，其中每一个矩阵$F_i$ 就作为一个样本，其标签就为它自身，因此DCNN-AE同AE以重构为目的进行特征的学习。</p><p>在编码层，针对每个$F_i$进行卷积操作（选取$2*2$的卷积核，取最大值）：</p><script type="math/tex; mode=display">\mathbf{J}_{i}^{k}=\sigma\left(\mathbf{H}_{i} * \mathbf{W}^{k}+B^{k}\right)</script><p>同样在解码层，进行如下的up-sampling操作：</p><script type="math/tex; mode=display">\hat{\mathbf{H}}_{i}=\sigma\left(\sum_{k=1}^{|F I|} \mathbf{J}_{i}^{k} * \tilde{\mathbf{W}}^{k}+B^{k}\right)</script><p>网络结构图如下：</p><p><img src="/img/DeepAE/4.png" srcset="/img/loading.gif" alt=""></p><p>DCNN-AE在建模的过程中，输入矩阵$F_i$是单独考虑的，即认为它们相互间是独立的。但是由于时序关系的存在$F_i$和$F_j$是存在相互关系的，DCNN-AE并不能分析这种关系，因此作者紧接着提出了LSTM-AE。</p><h3 id="Long-Short-Term-Memory-Neraul-Netwok-based-AE"><a href="#Long-Short-Term-Memory-Neraul-Netwok-based-AE" class="headerlink" title="Long Short Term Memory Neraul Netwok based AE"></a><strong>Long Short Term Memory Neraul Netwok based AE</strong></h3><p>LSTM将经过特征增强后得到的序列看成一个时间序列，</p><script type="math/tex; mode=display">F=\left[ H_1,F_2,\cdots ,H_h \right]</script><p>首先，考虑到$F_i$是一个维度为：$8d<em>k$的矩阵，所以将$F_i$按行进行拼接，转变成一个$8dk</em>1$ 的向量，如图所示：</p><p><img src="/img/DeepAE/5.png" srcset="/img/loading.gif" alt=""></p><p>然后将转变后形成的新的序列作为网络的输入，其中AE的Encoder 和Decoder的部分均由LSTM来完成，对于每一个时间点$i$， 其对应的网络结构如下：(图中LSTM的时间步长设为$g=5$，需要输入$i-4$到$i$这五个时间步的数据)</p><p><img src="/img/DeepAE/6.png" srcset="/img/loading.gif" alt=""></p><p>下面简单给大家解释一下图中的过程：</p><p>Encoder：结合LSTM的性质， 在任意时刻$j$($i-4&lt;j&lt;i$)的隐含状态$J_{j}^{en}$ 同时受到当前时刻的输入和过去时刻隐含状态的影响。注意，最终只有$i$时刻的隐含状态传递给了decoder部分。所以，满足：</p><script type="math/tex; mode=display">J_{j}^{en}=J_{j}^{de}</script><p>Decoder: 与encoder的过程相反，decoder从$i$时刻逐一向$i-4$时刻遍历。所以当前时刻的隐含状态会受到当前时刻和下一个时刻隐含状态的影响。</p><h2 id="Codes"><a href="#Codes" class="headerlink" title="Codes"></a>Codes</h2><p>知乎上有位博主提供了这篇文章中LSTM-AE的代码实现，这里给大家提供一个链接，有想尝试的朋友可以参考：</p><p><a href="https://zhuanlan.zhihu.com/p/237292509" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/237292509</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>文章</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>AE</tag>
       
     </tags>
     
