@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      510 字
+      766 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      10
        分钟
     </span>
   
@@ -205,7 +205,7 @@
             
             <article class="markdown-body">
               <h1 id="TAnoGAN-Time-Series-Anomaly-Detection-with-Generative-Adversarial-Networks"><a href="#TAnoGAN-Time-Series-Anomaly-Detection-with-Generative-Adversarial-Networks" class="headerlink" title="TAnoGAN: Time Series Anomaly Detection with Generative Adversarial Networks"></a>TAnoGAN: Time Series Anomaly Detection with Generative Adversarial Networks</h1><h2 id="文章下载地址："><a href="#文章下载地址：" class="headerlink" title="文章下载地址："></a>文章下载地址：</h2><p><a href="https://arxiv.org/pdf/2008.09567.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/2008.09567.pdf</a></p>
-<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>在实际生产过程中，例如制造业，医学图像处理，信息安全等领域，对于时间序列的异常检测具有重要的意义。近年来，利用生成对抗网络 (GAN) 进行生成和异常检测在图像处理领域受到了广泛的关注。时间序列的异常检测往往可以看作是一个无监督学习任务。现有的大部分无监督学习异常检测方法，无法处理时间序列间的非线性关系，因此本文提出了一种基于GAN的监督学习方法，用于处理小样本情况下的时间序列异常检测。</p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>在实际生产过程中，例如制造业，医学图像处理，信息安全等领域，对于时间序列的异常检测具有重要的意义。近年来，利用生成对抗网络 (Generative advesarial network, GAN) 进行生成和异常检测在图像处理领域受到了广泛的关注。时间序列的异常检测往往可以看作是一个无监督学习任务。现有的大部分无监督学习异常检测方法，无法处理时间序列间的非线性关系，因此本文提出了一种基于GAN的监督学习方法，用于处理小样本情况下的时间序列异常检测。</p>
 <h2 id="Contributions"><a href="#Contributions" class="headerlink" title="Contributions"></a>Contributions</h2><p>本文作者总结了如下贡献点：</p>
 <ol>
 <li>We propose a GAN-based method called TAnoGan to detect anomalies in time series datasets when a small number of data points are available. In general, neural network-based models require setting a large number of parameters. Therefore, these models need to be trained on huge number of data points.</li>
@@ -215,14 +215,19 @@
 </ol>
 <h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><p><strong>前情提要：</strong></p>
 <ol>
-<li>无监督学习方法的异常检测模式</li>
-</ol>
+<li><p>无监督学习方法的异常检测模式</p>
 <p>主要考察样本沿时间是否服从一个正常的分布，将不服从分布的样本点视为异常点；</p>
-<ol>
-<li>基于GAN的异常检测的方法的基本模式</li>
-</ol>
+</li>
+<li><p>基于GAN的异常检测的方法的基本模式</p>
 <p>Detecting anomalies in time series using GAN requires modelling the normal behaviour of time<br>series data using the adversarial training process and then detecting anomalies using an anomaly score that indicates how much the data points have deviated from the normal behaviour [3], [12], [2].</p>
 <p>For learning the anomaly score, we first map the real time series data space to a latent space and then reconstruct the data from latent space. The anomaly score is estimated as the loss between the real data and reconstructed (fake) data.</p>
+</li>
+<li><p>GAN 的主要思想</p>
+<p>GAN是通过<strong>对抗训练的方式</strong>来使得生成网络产生的样本服从真实数据分布。GAN包含两要素，一是<strong>判别网络</strong>（Generator）, 其目标是尽量准确地判断一个样本是来自于真实数据还是生成网络产生的；另一个是<strong>生成网络</strong>（Discriminator），其目标是通过对输入数据的学习，尽可能地生成判别网络无法区分来源的样本。GAN通过这两个目标相反的网络不断地进行交替训练，最后达到收敛。此时，如果判别网络再也无法判断出一个样本的来源，那么生成网络就被认为可以生成符合真实数据分布的样本。GAN的结构如图所示：</p>
+<p><img src="/img/1.png" srcset="/img/loading.gif" alt=""></p>
+</li>
+</ol>
+<p>作者：fromeast<br>链接：<a href="https://www.jianshu.com/p/a39756b751af" target="_blank" rel="noopener">https://www.jianshu.com/p/a39756b751af</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 <h2 id="Codes"><a href="#Codes" class="headerlink" title="Codes"></a>Codes</h2><p>这篇文章相关的代码可以在下面的网址下载，有想尝试的盆友可以参考：</p>
 <p><a href="https://paperswithcode.com/paper/tanogan-time-series-anomaly-detection-with#code" target="_blank" rel="noopener">https://paperswithcode.com/paper/tanogan-time-series-anomaly-detection-with#code</a></p>
 
