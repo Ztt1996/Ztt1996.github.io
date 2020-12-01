@@ -4,13 +4,38 @@
   
   
   <entry>
-    <title>VAE</title>
-    <link href="/2020/11/21/VAE/"/>
-    <url>/2020/11/21/VAE/</url>
+    <title>VRNN</title>
+    <link href="/2020/12/01/VRNN/"/>
+    <url>/2020/12/01/VRNN/</url>
     
     <content type="html"><![CDATA[]]></content>
     
     
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>VAE</title>
+    <link href="/2020/11/21/VAE/"/>
+    <url>/2020/11/21/VAE/</url>
+    
+    <content type="html"><![CDATA[<ol><li>介绍VAE</li><li>介绍VAE在非线性非高斯过程监测上的应用</li><li>相关文献</li></ol><p>Systematic Development of a New Variational Autoencoder Model Based on Uncertain Data for Monitoring Nonlinear Processes</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>深度学习</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>降维算法</tag>
+      
+    </tags>
     
   </entry>
   
