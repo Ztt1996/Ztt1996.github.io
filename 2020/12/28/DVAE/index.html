@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>VRNN - Hexo</title>
+  <title>Time-difference VAE - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -152,8 +152,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-12-01 15:03">
-      2020年12月1日 下午
+    <time datetime="2020-12-28 10:24">
+      2020年12月28日 上午
     </time>
   </div>
 
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      326 字
+      422 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      4
        分钟
     </span>
   
@@ -204,9 +204,38 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="A-Recurrent-Latent-Variable-Model-for-Sequential-Data"><a href="#A-Recurrent-Latent-Variable-Model-for-Sequential-Data" class="headerlink" title="A Recurrent Latent Variable Model for Sequential Data"></a>A Recurrent Latent Variable Model for Sequential Data</h1><p>文章下载地址：<a href="https://arxiv.org/abs/1506.02216v6" target="_blank" rel="noopener">https://arxiv.org/abs/1506.02216v6</a></p>
-<h3 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h3><p>学习和生成时间序列一直是机器学习领域所面临得挑战，很长一段时间以来是由dynamic beyesian networks （DBNs）例如隐马尔可夫模型和卡尔曼滤波器等方法为代表。然而随着RNN为代表的循环神经网络的出现，这种局面得到了逆转。相比于DBNs模型，RNN有着更好的非线性表征能力和隐含状态表示能力（文中提到是：distributed internal state representation，有一丢丢不太理解）。但是对于高度结构化的时间序列，例如自然语言，往往表现出复杂的时序依赖关系和高度的不确定性，RNN等基于output probability的模型并不能很好地去表征这样的不确定性和依赖性。VAE是一种用于非时间序列数据，进行随机潜变量提取和数据生成的神经网络模型，它提供了潜在随机状态到观测变量间的灵活的非线性映射。因此，本文将VAE拓展成循环结构，与RNN结合，用于分析具有复杂分布的高维时间序列。</p>
-<h3 id="VAE-和-RNN简介"><a href="#VAE-和-RNN简介" class="headerlink" title="VAE 和 RNN简介"></a>VAE 和 RNN简介</h3><h3 id="VRNN（Variational-recurrent-neural-network-）"><a href="#VRNN（Variational-recurrent-neural-network-）" class="headerlink" title="VRNN（Variational recurrent neural network ）"></a>VRNN（Variational recurrent neural network ）</h3><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2>
+              <h1 id="每周文献阅读："><a href="#每周文献阅读：" class="headerlink" title="每周文献阅读："></a>每周文献阅读：</h1><h1 id="TEMPORAL-DIFFERENCE-VARIATIONAL-AUTO-ENCODER"><a href="#TEMPORAL-DIFFERENCE-VARIATIONAL-AUTO-ENCODER" class="headerlink" title="TEMPORAL DIFFERENCE VARIATIONAL AUTO-ENCODER"></a>TEMPORAL DIFFERENCE VARIATIONAL AUTO-ENCODER</h1><h2 id="下载地址："><a href="#下载地址：" class="headerlink" title="下载地址："></a>下载地址：</h2><p><a href="https://arxiv.org/abs/1806.03107" target="_blank" rel="noopener">https://arxiv.org/abs/1806.03107</a></p>
+<h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>本周阅读的是“Temoral difference variational auto-encoder”, 介绍用于时间序列生成的TD-VAE。我在阅读VAE相关的文章时发现，目前利用VAE生成时间序列的相关研究不约而同地从state-space model的角度出发，考虑数据中的状态转移，与传统的linear dynamical systems有着异曲同工之处。</p>
+<h2 id="文章框架"><a href="#文章框架" class="headerlink" title="文章框架:"></a>文章框架:</h2><ul>
+<li><p>introduction</p>
+</li>
+<li><p>Model design：知识储备，介绍隐含状态空间（latent-state-space），置信状态的在线估计；</p>
+</li>
+<li>TD-VAE<ul>
+<li>介绍TD-VAE的下确界（基于置信状态的ELBO）</li>
+<li>TD-VAE的跳跃式隐含状态建模</li>
+<li>TD-VAE的整体框架</li>
+</ul>
+</li>
+<li>实验</li>
+<li>附录解释</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>这篇文章的动机希望解决在强化学习中遇到的问题。</p>
+<p>文章认为，强化学习中的智能体要在已知环境中做出最优的决策，需要满足三方面的要求：</p>
+<ol>
+<li><p>智能体要能够构建出抽象的状态（对应文中提到的latent-state）来代表实际可观测环境的信息，另外从state层面进行预测；</p>
+</li>
+<li><p>智能体应该学习置信状态（belief state）来考虑实际环境中的不确定性；（看完文章再修改)</p>
+</li>
+<li><p>模型需要具有temporal abstraction， 不仅仅可以进行实现对未来信息的“跳跃式”预测，同时也可以在不进行对所有过程数据反向传播的情况下利用不连续的过去数据；</p>
+<p>目前没有模型能同时解决上述的三个问题，所以文章提出了TD-VAE。</p>
+</li>
+</ol>
+<h2 id="Preliminary"><a href="#Preliminary" class="headerlink" title="Preliminary"></a>Preliminary</h2><ol>
+<li>latent state 的构建</li>
+<li></li>
+</ol>
+
             </article>
             <hr>
             <div>
@@ -236,18 +265,12 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/12/28/DVAE/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Time-difference VAE</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/11/21/VAE/">
-                        <span class="hidden-mobile">VAE</span>
+                      <a href="/2020/12/01/VRNN/">
+                        <span class="hidden-mobile">VRNN</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -386,7 +409,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "VRNN&nbsp;",
+        "Time-difference VAE&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
