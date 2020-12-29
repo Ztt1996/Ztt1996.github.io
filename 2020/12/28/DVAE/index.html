@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      624 字
+      971 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      11
        分钟
     </span>
   
@@ -239,7 +239,20 @@
 \sum_{t=1}^T{\log p\left( x_t\mid x_1,...,x_{t-1} \right)}</script><p>基于这样的形式，我们可以建立AR模型或者RNN等循环神经网络来建立历史数据与当前及未来数据间的模型。这些模型都非常地简单易理解，但是有什么问题呢？</p>
 <p>文章的作者指出，首先这样的模型是基于原始的观测变量空间去进行预测，当数据维度大时会带来很大的计算负担。并且AR和RNN对未来数据的预测是基于上一步的预测结果的，这样的链式结构很可能造成预测的不稳定。</p>
 <ul>
-<li><h3 id="State-Space-model"><a href="#State-Space-model" class="headerlink" title="State-Space model"></a>State-Space model</h3></li>
+<li><h3 id="State-Space-model"><a href="#State-Space-model" class="headerlink" title="State-Space model"></a>State-Space model</h3><p>区别于回归模型，另一种用于时间序列建模的结构就是状态空间方程。状态空间方程利用抽象的隐含状态来表征数据状态的切换，是基于隐马尔可夫结构的，表示如下：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+z_{t}=A z_{t-1}+\eta_{t}^{h} \\
+x_{t}=B z_{t}+\eta_{t}^{v}
+\end{array}</script><p>其中$z_1,z_2,\cdots ,z_T$为隐变量序列，$x_1,x_2,\cdots ,x_T$为观测到的时间序列。</p>
+<p>隐变量和观测序列的联合概率分布可以表示为：</p>
+<script type="math/tex; mode=display">
+p(x, z)=\prod_{t} p\left(z_{t} \mid z_{t-1}\right) p\left(x_{t} \mid z_{t}\right)</script><p>基于VAE模型的训练方法往往会用一个先验分布来估计隐含状态，即：</p>
+<script type="math/tex; mode=display">
+q(z \mid x)=\prod_{t} q\left(z_{t} \mid z_{t-1}, \phi_{t}(\mathbf{x})\right)</script><p>这里的$\phi_{t}$表示利用原始时间序列计算先验分布的操作，由此隐变量的求取可以转变和优化如下的变分下确界：</p>
+<script type="math/tex; mode=display">
+\log p(\mathbf{x}) \geq \mathbb{E}_{\mathbf{z} \sim q(\mathbf{z} \mid \mathbf{x})}\left[\sum_{t} \log p\left(x_{t} \mid z_{t}\right)+\log p\left(z_{t} \mid z_{t-1}\right)-\log q\left(z_{t} \mid z_{t-1}, \phi_{t}(\mathbf{x})\right)\right]</script><p>这里就不进行详细地推导啦，后续可以关注我关于linear dynamical systems（LDS）的博客，会给大家讲一遍详细的推导哦~</p>
+</li>
 </ul>
 
             </article>
