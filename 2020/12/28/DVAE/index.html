@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      971 字
+      1.3k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      16
        分钟
     </span>
   
@@ -239,7 +239,7 @@
 \sum_{t=1}^T{\log p\left( x_t\mid x_1,...,x_{t-1} \right)}</script><p>基于这样的形式，我们可以建立AR模型或者RNN等循环神经网络来建立历史数据与当前及未来数据间的模型。这些模型都非常地简单易理解，但是有什么问题呢？</p>
 <p>文章的作者指出，首先这样的模型是基于原始的观测变量空间去进行预测，当数据维度大时会带来很大的计算负担。并且AR和RNN对未来数据的预测是基于上一步的预测结果的，这样的链式结构很可能造成预测的不稳定。</p>
 <ul>
-<li><h3 id="State-Space-model"><a href="#State-Space-model" class="headerlink" title="State-Space model"></a>State-Space model</h3><p>区别于回归模型，另一种用于时间序列建模的结构就是状态空间方程。状态空间方程利用抽象的隐含状态来表征数据状态的切换，是基于隐马尔可夫结构的，表示如下：</p>
+<li><h3 id="State-space-model"><a href="#State-space-model" class="headerlink" title="State-space model"></a>State-space model</h3><p>区别于回归模型，另一种用于时间序列建模的结构就是状态空间方程。状态空间方程利用抽象的隐含状态来表征数据状态的切换，是基于隐马尔可夫结构的，表示如下：</p>
 <script type="math/tex; mode=display">
 \begin{array}{l}
 z_{t}=A z_{t-1}+\eta_{t}^{h} \\
@@ -253,7 +253,22 @@ q(z \mid x)=\prod_{t} q\left(z_{t} \mid z_{t-1}, \phi_{t}(\mathbf{x})\right)</sc
 <script type="math/tex; mode=display">
 \log p(\mathbf{x}) \geq \mathbb{E}_{\mathbf{z} \sim q(\mathbf{z} \mid \mathbf{x})}\left[\sum_{t} \log p\left(x_{t} \mid z_{t}\right)+\log p\left(z_{t} \mid z_{t-1}\right)-\log q\left(z_{t} \mid z_{t-1}, \phi_{t}(\mathbf{x})\right)\right]</script><p>这里就不进行详细地推导啦，后续可以关注我关于linear dynamical systems（LDS）的博客，会给大家讲一遍详细的推导哦~</p>
 </li>
+<li><h3 id="Online-creation-of-belief-state"><a href="#Online-creation-of-belief-state" class="headerlink" title="Online creation of belief state"></a>Online creation of belief state</h3><p>对于时间序列，未来数据可以利用已知的过去数据进行未来数据条件分布的推断，即</p>
+</li>
 </ul>
+<script type="math/tex; mode=display">
+p\left( x_{t+1},...,x_{T}\mid x_1,...,x_t \right)</script><p>对于状态方程，隐状态存在时，根据马尔可夫性质上述条件分布可以进一步写成</p>
+<script type="math/tex; mode=display">
+p\left(x_{t+1}, \ldots, x_{T} \mid x_{1}, \ldots, x_{t}\right)=\int p\left(z_{t} \mid x_{1}, \ldots, x_{t}\right) p\left(x_{t+1}, \ldots, x_{T} \mid z_{t}\right) \mathrm{d} z_{t}</script><p>建立belief state, 下面简称 BS，就是希望建议网络从 $x_1,x_2,\cdots ,x_t$中获取一个编码$b_t$ , 满足：</p>
+<script type="math/tex; mode=display">
+p\left( z_t\mid x_1,...,x_t \right) \approx p\left( z_t\mid b_t \right)</script><p>这样的编码$b_t$ 包含了当前状态的全部信息，可以有效表征概率分布：$p\left( z_t\mid x_1,…,x_t \right)$ , 因此可以用来建立BF。</p>
+<h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><ul>
+<li><h3 id="基于BS的ELBO"><a href="#基于BS的ELBO" class="headerlink" title="基于BS的ELBO"></a>基于BS的ELBO</h3></li>
+</ul>
+<p>对于VAE模型，最重要的就是要优化的变分下确界。所以在介绍TD-VAE模型，文章先给大家明确了TD-VAE的变分下确界。</p>
+<p>基于之前的介绍，TD-VAE模型满足要点：</p>
+<p>a) TD-VAE构建了隐状态空间： latent state-space</p>
+<p>b) TD-VAE构建了在线的置信状态BS（关于BS的必要性和意义，我在介绍完TD-VAE模型会给大家讲解，大家耐心看哈~）；</p>
 
             </article>
             <hr>
