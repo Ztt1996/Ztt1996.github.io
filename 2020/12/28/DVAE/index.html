@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.4k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16
+      17
        分钟
     </span>
   
@@ -269,6 +269,18 @@ p\left( z_t\mid x_1,...,x_t \right) \approx p\left( z_t\mid b_t \right)</script>
 <p>基于之前的介绍，TD-VAE模型满足要点：</p>
 <p>a) TD-VAE构建了隐状态空间： latent state-space</p>
 <p>b) TD-VAE构建了在线的置信状态BS（关于BS的必要性和意义，我在介绍完TD-VAE模型会给大家讲解，大家耐心看哈~）；</p>
+<p>对于某一个时刻$t$，假设此时$x_t$的条件似然仅可由$t-1$和$t$两个时刻的状态推断得到，那么关于X的对数似然可以写成：</p>
+<script type="math/tex; mode=display">
+\log p(\mathbf{x})=\sum_t{\log}p\left( x_t\mid x_{<t} \right) 
+\\
+=\sum_t{\log}p\left( x_t\mid z_{t-1},z_t,x_{<t} \right)</script><p>基于VAE相似的推导，TD-VAE的ELBO可以直接写出来：（关于VAE的推导，我也会给大家专门出一起博客详细道来哦~）</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\log p\left(x_{t} \mid x_{<t}\right) \geq & \mathbb{E}_{\left(z_{t-1}, z_{t}\right) \sim q\left(z_{t-1}, z_{t} \mid x_{\leq t}\right)}\left[\log p\left(x_{t} \mid z_{t-1}, z_{t}, x_{<t}\right)+\log p\left(z_{t-1}, z_{t} \mid x_{<t}\right)\right.\\
+&\left.-\log q\left(z_{t-1}, z_{t} \mid x_{\leq t}\right)\right]
+\end{aligned}</script><p>等于：</p>
+<script type="math/tex; mode=display">
+\log p\left( x_t\mid x_{<t} \right) \ge \,\,\mathbb{E}_{\left( z_{t-1},z_t \right) \sim q\left( z_{t-1},z_t\mid x_{\le t} \right)}\log p\left( x_t\mid z_{t-1},z_t,x_{<t} \right) -KL\left[ q\left( z_{t-1},z_t\mid x_{\le t} \right) \left| p\left( z_{t-1},z_t\mid x_{<t} \right) \right. \right.</script><p>这样是不是和VAE的变分下确界其实很像。</p>
 
             </article>
             <hr>
