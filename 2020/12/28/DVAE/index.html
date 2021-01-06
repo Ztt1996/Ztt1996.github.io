@@ -239,7 +239,9 @@
 \sum_{t=1}^T{\log p\left( x_t\mid x_1,...,x_{t-1} \right)}</script><p>基于这样的形式，我们可以建立AR模型或者RNN等循环神经网络来建立历史数据与当前及未来数据间的模型。这些模型都非常地简单易理解，但是有什么问题呢？</p>
 <p>文章的作者指出，首先这样的模型是基于原始的观测变量空间去进行预测，当数据维度大时会带来很大的计算负担。并且AR和RNN对未来数据的预测是基于上一步的预测结果的，这样的链式结构很可能造成预测的不稳定。</p>
 <ul>
-<li><h3 id="State-space-model"><a href="#State-space-model" class="headerlink" title="State-space model"></a>State-space model</h3><p>区别于回归模型，另一种用于时间序列建模的结构就是状态空间方程。状态空间方程利用抽象的隐含状态来表征数据状态的切换，是基于隐马尔可夫结构的，表示如下：</p>
+<li><h3 id="State-space-model"><a href="#State-space-model" class="headerlink" title="State-space model"></a>State-space model</h3></li>
+</ul>
+<p>区别于回归模型，另一种用于时间序列建模的结构就是状态空间方程。状态空间方程利用抽象的隐含状态来表征数据状态的切换，是具有隐马尔可夫结构的，表示如下：</p>
 <script type="math/tex; mode=display">
 \begin{array}{l}
 z_{t}=A z_{t-1}+\eta_{t}^{h} \\
@@ -251,15 +253,21 @@ p(x, z)=\prod_{t} p\left(z_{t} \mid z_{t-1}\right) p\left(x_{t} \mid z_{t}\right
 <script type="math/tex; mode=display">
 q(z \mid x)=\prod_{t} q\left(z_{t} \mid z_{t-1}, \phi_{t}(\mathbf{x})\right)</script><p>这里的$\phi_{t}$表示利用原始时间序列计算先验分布的操作，由此隐变量的求取可以转变和优化如下的变分下确界：</p>
 <script type="math/tex; mode=display">
-\log p(\mathbf{x}) \geq \mathbb{E}_{\mathbf{z} \sim q(\mathbf{z} \mid \mathbf{x})}\left[\sum_{t} \log p\left(x_{t} \mid z_{t}\right)+\log p\left(z_{t} \mid z_{t-1}\right)-\log q\left(z_{t} \mid z_{t-1}, \phi_{t}(\mathbf{x})\right)\right]</script><p>这里就不进行详细地推导啦，后续可以关注我关于linear dynamical systems（LDS）的博客，会给大家讲一遍详细的推导哦~</p>
-</li>
+\log p(\mathbf{x})\ge \mathbb{E}_{\mathbf{z}\sim q(\mathbf{z}\mid \mathbf{x})}\sum_t{\log}p\left( x_t\mid z_t \right) 
+\\
+\,\,                  +\mathbb{E}_{\mathbf{z}\sim q(\mathbf{z}\mid \mathbf{x})}\left[ \begin{array}{c}
+    \log p\left( z_t\mid z_{t-1} \right) -\log q\left( z_t\mid z_{t-1},\phi _t(x) \right)\\
+\end{array} \right]</script><p>这里就不进行详细地推导啦，后续可以关注我关于linear dynamical systems（LDS）的博客，会给大家讲一遍详细的推导哦~</p>
+<ul>
 <li><h3 id="Online-creation-of-belief-state"><a href="#Online-creation-of-belief-state" class="headerlink" title="Online creation of belief state"></a>Online creation of belief state</h3><p>对于时间序列，未来数据可以利用已知的过去数据进行未来数据条件分布的推断，即</p>
 </li>
 </ul>
 <script type="math/tex; mode=display">
 p\left( x_{t+1},...,x_{T}\mid x_1,...,x_t \right)</script><p>对于状态方程，隐状态存在时，根据马尔可夫性质上述条件分布可以进一步写成</p>
 <script type="math/tex; mode=display">
-p\left(x_{t+1}, \ldots, x_{T} \mid x_{1}, \ldots, x_{t}\right)=\int p\left(z_{t} \mid x_{1}, \ldots, x_{t}\right) p\left(x_{t+1}, \ldots, x_{T} \mid z_{t}\right) \mathrm{d} z_{t}</script><p>建立belief state, 下面简称 BS，就是希望建议网络从 $x_1,x_2,\cdots ,x_t$中获取一个编码$b_t$ , 满足：</p>
+p\left( x_{t+1},...,x_T\mid x_1,...,x_t \right) 
+\\
+=\int{p}\left( z_t\mid x_1,...,x_t \right) p\left( x_{t+1},...,x_T\mid z_t \right) \mathrm{d}z_t</script><p>建立belief state, 下面简称 BS，就是希望建议网络从 $x_1,x_2,\cdots ,x_t$中获取一个编码$b_t$ , 满足：</p>
 <script type="math/tex; mode=display">
 p\left( z_t\mid x_1,...,x_t \right) \approx p\left( z_t\mid b_t \right)</script><p>这样的编码$b_t$ 包含了当前状态的全部信息，可以有效表征概率分布：$p\left( z_t\mid x_1,…,x_t \right)$ , 因此可以用来建立BF。</p>
 <h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><ul>
@@ -275,12 +283,22 @@ p\left( z_t\mid x_1,...,x_t \right) \approx p\left( z_t\mid b_t \right)</script>
 \\
 =\sum_t{\log}p\left( x_t\mid z_{t-1},z_t,x_{<t} \right)</script><p>基于VAE相似的推导，TD-VAE的ELBO可以直接写出来：（关于VAE的推导，我也会给大家专门出一起博客详细道来哦~）</p>
 <script type="math/tex; mode=display">
-\begin{aligned}
-\log p\left(x_{t} \mid x_{<t}\right) \geq & \mathbb{E}_{\left(z_{t-1}, z_{t}\right) \sim q\left(z_{t-1}, z_{t} \mid x_{\leq t}\right)}\left[\log p\left(x_{t} \mid z_{t-1}, z_{t}, x_{<t}\right)+\log p\left(z_{t-1}, z_{t} \mid x_{<t}\right)\right.\\
-&\left.-\log q\left(z_{t-1}, z_{t} \mid x_{\leq t}\right)\right]
-\end{aligned}</script><p>等于：</p>
+\log p\left( x_t\mid x_{<t} \right) \ge \mathbb{E}_{\left( z_{t-1},z_t \right) \sim q\left( z_{t-1},z_t\mid x_{\le t} \right)}\log p\left( x_t\mid z_{t-1},z_t,x_{<t} \right)</script><script type="math/tex; mode=display">
+                   +\mathbb{E}_{\left( z_{t-1},z_t \right) \sim q\left( z_{t-1},z_t\mid x_{\le t} \right)}\left[ \log p\left( z_{t-1},z_t\mid x_{<t} \right) \right. \left. -\,\,\log q\left( z_{t-1},z_t\mid x_{\le t} \right) \right]</script><p>等于：</p>
 <script type="math/tex; mode=display">
-\log p\left( x_t\mid x_{<t} \right) \ge \,\,\mathbb{E}_{\left( z_{t-1},z_t \right) \sim q\left( z_{t-1},z_t\mid x_{\le t} \right)}\log p\left( x_t\mid z_{t-1},z_t,x_{<t} \right) -KL\left[ q\left( z_{t-1},z_t\mid x_{\le t} \right) \left| p\left( z_{t-1},z_t\mid x_{<t} \right) \right. \right.</script><p>这样是不是和VAE的变分下确界其实很像。</p>
+\log p\left( x_t\mid x_{<t} \right) \ge \,\,\mathbb{E}_{\left( z_{t-1},z_t \right) \sim q\left( z_{t-1},z_t\mid x_{\le t} \right)}\log p\left( x_t\mid z_{t-1},z_t,x_{<t} \right) 
+\\</script><script type="math/tex; mode=display">
+\,\,                -KL\left[ q\left( z_{t-1},z_t\mid x_{\le t} \right) \left| p\left( z_{t-1},z_t\mid x_{<t} \right) \right. \right.</script><p>这样一看是不是和VAE的变分下确界很像。</p>
+<p>进一步结合状态空间方程的马尔可夫性质，即：一个随机过程在给定现在状态及所有过去状态情况下，其未来状态的条件概率分布仅依赖于当前状态。 我们可以进一步简化$x_t$的条件概率，得到</p>
+<script type="math/tex; mode=display">
+p\left(x_{t} \mid z_{t-1}, z_{t}, x_{<t}\right)=p\left(x_{t} \mid z_{t}\right)</script><script type="math/tex; mode=display">
+p\left(z_{t-1}, z_{t} \mid x_{<t}\right)=p\left(z_{t-1} \mid x_{<t}\right) p\left(z_{t} \mid z_{t-1}\right)</script><p>这样针对状态空间方程的变分下确界就进一步简化成：</p>
+<script type="math/tex; mode=display">
+\log p\left( x_t\mid x_{<t} \right) \ge \mathbb{E}_{\left( z_{t-1},z_t \right) \sim q\left( z_{t-1},z_t\mid x_{\le t} \right)}\left[ \log p\left( x_t\mid z_t \right) +\log p\left( z_{t-1}\mid x_{<t} \right) +\log p\left( z_t\mid z_{t-1} \right) \right]</script><script type="math/tex; mode=display">
+-\mathbb{E}_{\left( z_{t-1},z_t \right) \sim q\left( z_{t-1},z_t\mid x_{\le t} \right)}\log q\left( z_t,z_{t-1}\mid x_{\le t} \right)</script><p>文章希望在每个时刻构建一个BS来包含当前状态及之前的所有信息，所以对$q\left( z<em>t,z</em>{t-1}\mid x_{\le t} \right)$进步分解成如下两部分：（为啥子要这样，小朋友迷惑）</p>
+<script type="math/tex; mode=display">
+q\left( z_{t-1},z_t\mid x_{\le t} \right) =q\left( z_t\mid x_{\le}t \right) q\left( z_{t-1}\mid z_t,x_{\le t} \right)</script><p>变分下确界又又又可以改写成</p>
+<p><img src="/img/DVAE/1.png" srcset="/img/loading.gif" alt=""></p>
 
             </article>
             <hr>
